@@ -2,8 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'Inter', Arial, Helvetica, sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 12px;
     line-height: 16px;
     margin-right: 70px;
@@ -14,6 +13,7 @@
 .entry-button__signup {
     color: black;
     margin-right: 30px;
+    transition: opacity 0.3s ease-out;
 }
 
 .entry-button__signin {
@@ -22,17 +22,12 @@
     width: 76px;
     height: 32px;
     background-color: black;
-    border-radius: 8%;
+    border-radius: 3px;
     justify-content: center;
     align-items: center;
+    transition: opacity 0.3s ease-out;
 }
-
-.signup__button:hover {
-    opacity: 0.6;
-    cursor: pointer;
-}
-
-.signin__button:hover {
+.entry-button__signup:hover, .entry-button__signin:hover{
     opacity: 0.6;
     cursor: pointer;
 }

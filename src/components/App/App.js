@@ -4,7 +4,7 @@
 // import Login from '../Login';
 // import Register from '../Register';
 import Header from '../Header/Header';
-// import Main from '../Main';
+import Main from '../Main/Main';
 // import Movies from '../Movies';
 // import SavedMovies from '../SavedMovies';
 // import Profile from '../Profile';
@@ -12,12 +12,12 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Header/>
-      {/* <Route exact path="/">
+       {/* <Route exact path="/"> */}
         <Main/>
-      </Route>
-      <Route path="/movies">
+      {/* </Route> */}
+      {/* <Route path="/movies">
         <Movies/>
       </Route>
       <Route path="/saved-movies">
