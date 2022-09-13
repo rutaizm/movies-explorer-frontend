@@ -1,0 +1,27 @@
+.stack {   
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0;
+}
+
+.stack__item {
+    width: 90px;
+    height: 60px;
+    background-color: #E8E8E8;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: black;
+    letter-spacing: -0.04em;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.stack__item:last-child {
+    margin-right: 0;
+}
