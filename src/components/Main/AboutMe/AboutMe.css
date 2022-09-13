@@ -1,0 +1,50 @@
+.student {
+    padding: 110px 70px;
+}
+
+.student__caption {
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+    margin-bottom: 15px;
+}
+.student__container {
+    display: flex;
+    padding-top: 57px;
+    box-sizing: border-box;
+}
+
+.student__wrap {
+    display: flex;
+    flex-direction: column;
+    margin-right: 275px;
+}
+
+.student__header {
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -0.04em;
+    margin: 0;
+}
+
+.student__brief {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.student__bio {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    margin-top: 8px;
+    margin-bottom: 100px;
+}
+
+.student__git {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+}

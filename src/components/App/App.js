@@ -1,6 +1,6 @@
 
 // import { Route } from 'react-router-dom';
-// import Footer from '../Footer';
+import Footer from '../Footer/Footer';
 // import Login from '../Login';
 // import Register from '../Register';
 import Header from '../Header/Header';
@@ -31,8 +31,8 @@ function App() {
       </Route>
       <Route path="/signup">
         <Register/>
-      </Route>
-      <Footer/> */}
+      </Route>*/}
+      <Footer/> 
     </div>
   );
 }
