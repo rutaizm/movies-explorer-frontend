@@ -3,8 +3,9 @@
     flex-direction: row;
     background-color: #F3C1F8;
     min-height: 574px;
-    padding: 75px 70px 50px 70px;
+    padding: 75px 70px 0 70px;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .promo__wrap {

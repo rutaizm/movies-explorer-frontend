@@ -1,0 +1,43 @@
+.about {
+    padding: 111px 70px;
+    box-sizing: border-box;
+}
+
+.about__header{
+    font-size: 22px;
+    line-height: 27px;
+    margin: 0 0 23px;
+    letter-spacing: -0.04em;
+}
+
+.about__wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 1100px;
+    margin-bottom: 22px;
+}
+
+.about__article {
+    font-weight: 400;
+    padding: 61px 0;
+    box-sizing: border-box;
+}
+
+.about__article:nth-child(2){
+    margin-left: 51px;
+}
+
+.about__article-header {
+    font-size: 20px;
+    line-height: 24px;
+    margin: 0;
+    letter-spacing: -0.04em;
+   
+}
+
+.about__article-text {
+    font-size: 14px;
+    line-height: 20px;
+    margin: 26px 0;
+}
