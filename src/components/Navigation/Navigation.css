@@ -23,6 +23,7 @@
     font-size: 13px;
     line-height: 18px;
     margin-left: 44px;
+    transition: opacity 0.3s ease-out;
 }
 
 .navigation__saved-movies {
@@ -30,6 +31,7 @@
     font-size: 13px;
     line-height: 18px;
     margin-left: 17px;
+    transition: opacity 0.3s ease-out;
 }
 
 .navigation__account {
@@ -37,6 +39,7 @@
     font-size: 14px;
     line-height: 16px;
     margin-right: 14px;
+    transition: opacity 0.3s ease-out;
 }
 
 .navigation__icon{    
@@ -47,5 +50,11 @@
     background-color: #F9F9F9;
     background-image: url(../../images/icon.svg);
     border-radius: 6px;
-    border-color: transparent;   
+    border-color: transparent;
+    transition: opacity 0.3s ease-out;
+}
+
+.navigation__movies:hover, .navigation__saved-movies:hover, .navigation__account:hover, .navigation__icon:hover {
+    cursor: pointer;
+    opacity: .6;
 }

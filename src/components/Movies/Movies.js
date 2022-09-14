@@ -1,10 +1,13 @@
-// import Navigation from '../Navigation/Navigation.js';
+import SearchForm from './SearchForm/SearchForm.js';
+import MoviesCardList from './MoviesCardList/MoviesCardList.js';
 
+function Movies() {
+    return(
+        <>
+            <SearchForm/>
+            <MoviesCardList/>
+        </>
+    )
+}
 
-// function Movies() {
-//     return(
-        
-//     )
-// }
-
-// export default Movies;
+export default Movies;

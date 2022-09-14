@@ -20,7 +20,7 @@ function App() {
       </Route>
        <Route path="/movies">
         <Header/>
-        {/* <Movies/> */}
+        <Movies/>
         <Footer/> 
       </Route>
       {/*
