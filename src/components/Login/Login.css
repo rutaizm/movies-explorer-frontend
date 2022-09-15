@@ -1,4 +1,4 @@
-.register {
+.login {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,7 +22,7 @@
     width: 100%;
     border: none;
     outline: none;
-    margin: 15px 0;
+    margin: 14px 0;
     padding: 0 15px;
     box-sizing: border-box;
 }
@@ -50,26 +50,4 @@
     line-height: 17px;
     margin-top: 61px;
     transition: opacity 0.3s ease-out;  
-}
-
-.signin__text {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    color: #A0A0A0;
-}
-
-.signin__login {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    text-decoration: none;
-    color: black;
-    margin-left: 6px;
-    transition: opacity 0.3s ease-out;  
-}
-
-.signin__login:hover, .signin__button:hover {
-    cursor: pointer;
-    opacity: .6;
 }

@@ -1,0 +1,39 @@
+.signin {
+    padding-top: 70px;
+}
+
+.signin__container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 396px;
+}
+
+.signin__hello {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    margin: 38px 0 35px;
+}
+
+.signin__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.signin__wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border: none;
+}
+
+.signin__caption {
+    display: flex;
+    align-items: baseline;
+    padding-top: 4px;
+    box-sizing: border-box;
+}
