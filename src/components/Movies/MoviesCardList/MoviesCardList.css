@@ -1,3 +1,14 @@
 .moviescard {
-    padding: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.moviescard__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    justify-items: center;
+    column-gap: 20px;
+    row-gap: 32px;
+    width: calc(100% - 70px * 2);
 }

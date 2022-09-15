@@ -1,13 +1,11 @@
 .card {
-    width: 270px;
-    height: 218px;
+    width: 100%;
     list-style: none;
     box-shadow: 0 16px 24px rgba(0, 0, 0, 0.05);
 }
 
 .card__image {
-    width: 270px;
-    height: 151px;
+    width: 100%;
 }
 
 .card__wrap{
