@@ -29,15 +29,25 @@
 .card__button {
     width: 16px;
     height: 16px;
-    border-radius: 10px;
-    background-image: url(../../../images/saved.svg);
+    border-radius: 10px;    
     border: none;
     background-repeat: no-repeat;
     background-position-y: -3px;
     background-position-x: -6px;
-    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: opacity 0.3s ease-out;
+}
+
+.card__button_type_save {
+    background-image: url(../../../images/saved.svg);
+}   
+
+.card__button_type_delete {
+    background-image: url(../../../images/delete.svg);
+    background-position:center;
+    background-color: white;
+    box-shadow: none;
 }
 
 .card__button:hover {
@@ -53,4 +63,5 @@
     font-size: 11px;
     line-height: 13px;
     padding-left: 12px;
+    color: #A0A0A0;
 }

@@ -1,17 +1,18 @@
 import './Navigation.css';
 import { ReactComponent as Logo }from '../../images/logo.svg';
+import { NavLink } from 'react-router-dom';
 
 function Navigation() {
     return(
         <>
             <nav className='navigation__links'>
                 <Logo className='header__logo'/>                    
-                <div className='navigation__movies'>Фильмы</div>
-                <div className='navigation__saved-movies'>Сохранённые фильмы</div>
+                <NavLink to='/movies' className='navigation__movies'>Фильмы</NavLink>
+                <NavLink to='/saved-movies' className='navigation__saved-movies'>Сохранённые фильмы</NavLink>
             </nav>  
             <nav className='navigation__profile'>
-                <div className='navigation__account'>Аккаунт</div>
-                <div className='navigation__icon'></div>
+                <NavLink to='/profile' className='navigation__account'>Аккаунт</NavLink>
+                <NavLink to='/profile' className='navigation__icon'></NavLink>
             </nav>
         </>       
     )

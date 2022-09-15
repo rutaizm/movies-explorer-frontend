@@ -24,6 +24,8 @@
     line-height: 18px;
     margin-left: 44px;
     transition: opacity 0.3s ease-out;
+    color: black;
+    text-decoration: none;
 }
 
 .navigation__saved-movies {
@@ -32,6 +34,8 @@
     line-height: 18px;
     margin-left: 17px;
     transition: opacity 0.3s ease-out;
+    color: black;
+    text-decoration: none;
 }
 
 .navigation__account {
@@ -40,6 +44,8 @@
     line-height: 16px;
     margin-right: 14px;
     transition: opacity 0.3s ease-out;
+    color: black;
+    text-decoration: none;
 }
 
 .navigation__icon{    

@@ -1,18 +1,19 @@
 
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 // import Login from '../Login';
-// import Register from '../Register';
+import Register from '../Register/Register';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
-// import SavedMovies from '../SavedMovies';
-// import Profile from '../Profile';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import Profile from '../Profile/Profile';
 import './App.css';
 
 function App() {
   return (
-    <div className="app">      
+    <div className="app">     
+    <Switch>
        <Route exact path="/">
         <Header page="main"/>
         <Main/>
@@ -22,20 +23,25 @@ function App() {
         <Header/>
         <Movies/>
         <Footer/> 
-      </Route>
-      {/*
+      </Route>      
       <Route path="/saved-movies">
+        <Header/>
         <SavedMovies/>
-      </Route>
+        <Footer/> 
+      </Route>      
       <Route path="/profile">
+        <Header/>
         <Profile/>
       </Route>
+      </Switch> 
+      {/*
       <Route path="/signin">
         <Login/>
       </Route>
+      */}
       <Route path="/signup">
         <Register/>
-      </Route>*/}
+      </Route>
       
     </div>
   );
