@@ -15,7 +15,7 @@ function Login() {
                 <span className='signin__error'></span>
                 <label className='signin__label' htmlFor='Email'>E-mail</label>
                 <input className='signin__input' type='email' id='Email'/>
-                <span className='signin__error'></span>
+                <span className='signin__error login__span'></span>
             </SignIn>
             <div className='signin__caption'>
                     <p className='signin__text'>Ещё не зарегистрированы?</p>

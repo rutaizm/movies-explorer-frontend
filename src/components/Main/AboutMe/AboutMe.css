@@ -33,18 +33,108 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 20px;
+    margin: 19px 0;
 }
 
 .student__bio {
     font-weight: 400;
     font-size: 14px;
     line-height: 22px;
-    margin-top: 8px;
-    margin-bottom: 100px;
+    margin: 25px 0 99px;
 }
 
 .student__git {
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
+}
+
+@media screen and (min-width:769px) and (max-width:1090px) {
+    .student__photo {
+        width: 255px;
+        height: 307px
+    }
+
+    .student__wrap {
+        margin-right: 150px;
+    }
+
+}
+
+@media screen and (min-width:540px) and (max-width:768px) {
+    .student {
+        padding: 110px 50px;
+    }
+
+    .student__wrap {
+        margin-right: 55px;
+    }
+
+    .student__header {
+        font-size: 40px;
+        line-height: 40px;
+    }
+
+    .student__brief {
+        font-size: 12px;
+        line-height: 18px;
+        margin: 16px 0 0 0;
+    }
+
+    .student__bio {
+        font-size: 12px;
+        line-height: 18px;
+        margin: 19px 0 87px 0;
+    }
+
+}
+
+@media screen and (min-width:320px) and (max-width:539px) {
+    .student {
+        padding: 42px 14px;
+    }
+
+    .student__caption {
+        font-size: 18px;
+        line-height: 22px;
+        margin-bottom: 19px;
+    }
+
+    .student__header {
+        font-size: 30px;
+        line-height: 36px;
+    }
+
+    .student__brief {
+        font-size: 11px;
+        line-height: 16px;
+        margin: 20px 0;
+    }
+
+    .student__bio {
+        font-size: 11px;
+        line-height: 16px;
+        margin: 0;
+    }
+
+    .student__photo {
+        width: 292px;
+        height: 352px
+    }
+
+    .student__container {
+        display: flex;
+        flex-direction: column-reverse;
+        padding-top: 51px;
+    }
+
+    .student__wrap {
+        margin-right: 0;
+        padding-top: 40px;
+        box-sizing: border-box;
+    }
+
+    .student__git {
+       margin-top: 40px;
+    }
 }

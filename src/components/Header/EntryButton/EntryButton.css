@@ -31,3 +31,23 @@
     opacity: 0.6;
     cursor: pointer;
 }
+
+@media screen and (min-width:540px) and (max-width:768px) {
+    .entry-button {
+        margin-right: 30px; 
+    }
+}
+
+@media screen and (min-width:320px) and (max-width:539px) {
+    .entry-button {
+        font-size: 10px;
+        margin-right: 14px; 
+    }
+    .entry-button__signup {
+        margin-right: 14px;
+    }    
+    .entry-button__signin {
+        width: 54px;
+        height: 26px;
+    }
+}
