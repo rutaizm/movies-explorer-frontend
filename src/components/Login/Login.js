@@ -10,10 +10,10 @@ function Login() {
                 hello='Рады видеть!'
                 buttonTitle='Войти'
             >
-                <label className='signin__label' htmlFor='name'>Имя</label>
+                <label className='signin__label' htmlFor='name'>E-mail</label>
                 <input className='signin__input' type='text' id='name'/>
                 <span className='signin__error'></span>
-                <label className='signin__label' htmlFor='Email'>E-mail</label>
+                <label className='signin__label' htmlFor='Email'>Пароль</label>
                 <input className='signin__input' type='email' id='Email'/>
                 <span className='signin__error login__span'></span>
             </SignIn>

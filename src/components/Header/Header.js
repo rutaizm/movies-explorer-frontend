@@ -5,6 +5,7 @@ import Navigation from '../Navigation/Navigation';
 
 
 function Header({page}) {
+
   if(page) {
     return (
         <header className='header header__pink'>

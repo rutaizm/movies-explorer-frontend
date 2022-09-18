@@ -74,6 +74,7 @@
 
     .footer__list-item:first-child {
         margin-right: 0px;
+        margin-bottom: 12px;
     }
 
     .footer__year {

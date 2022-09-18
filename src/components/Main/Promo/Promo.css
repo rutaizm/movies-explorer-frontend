@@ -52,7 +52,17 @@
     height: 304px;
 }
 
-@media screen and (min-width:540px) and (max-width:768px) {
+@media screen and (min-width:900px) and (max-width:1090px) {
+    .promo {
+        padding: 141px 30px 76px 30px;
+    }
+
+    .promo__image {
+        margin-top: -53px;
+    }    
+}
+
+@media screen and (min-width:540px) and (max-width:899px) {
     .promo {
         padding: 141px 44px 76px 44px;
         flex-direction: column-reverse;
@@ -90,13 +100,11 @@
         align-items: center;
     }
 
-
     .promo__header {
         font-size: 27px;
         line-height: 38px;
         margin-top: 44px;
     }
-
 
     .promo__text {
         margin:  24px 0 80px;

@@ -38,15 +38,9 @@
     height: 100%;
 }
 
-@media screen and (min-width:540px) and (max-width:768px) {
-    .chart {
-        grid-template-columns: 140px 528px;
-    }
-}
-
 @media screen and (min-width:320px) and (max-width:539px) {
     .chart {
-        grid-template-columns: 100px 184px;
+        grid-template-columns: 1fr 1.8fr;
     }
 
     .chart__text, .chart__week, .chart__weeks {
