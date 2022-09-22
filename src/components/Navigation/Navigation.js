@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import './Navigation.css';
+import '../BurgerMenu/BurgerMenu.css';
 import { ReactComponent as Logo }from '../../images/logo.svg';
 import { NavLink } from 'react-router-dom';
 
-function Navigation() {
+function Navigation({isOpen}) {
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 769);
 
@@ -38,9 +39,9 @@ function Navigation() {
                 isMobile && (
                     <>
                     <nav className='navigation__links'>
-                        <Logo className='header__logo'/>                    
-                        <button className='burger__menu'/>
+                        <Logo className='header__logo'/>
                     </nav>
+                    <button className='burger__menu' onClick={isOpen}/>                    
                 </>
             )}
         </>       

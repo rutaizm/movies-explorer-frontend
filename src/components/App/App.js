@@ -9,24 +9,51 @@ import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile.css/Profile';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import './App.css';
 
 function App() {
+
+  const [burgerMenuIsOpen, setBurgerMenuIsOpen] = React.useState(false);
+
+  function openBurgerMenu() {
+    setBurgerMenuIsOpen(true);
+  }
+
+function burgerMenuIsClosed() {
+  setBurgerMenuIsOpen(false);
+}
+
   return (
     <div className="app">     
     <Switch>
        <Route exact path="/">
-        <Header page="main"/>
-        <Main/>
+        <Header 
+          page="main"
+          isOpen={openBurgerMenu}
+        />
+        <Main/>       
         <Footer/> 
       </Route>
        <Route path="/movies">
-        <Header/>
+       <BurgerMenu
+          isOpen={burgerMenuIsOpen}
+          isClose={burgerMenuIsClosed}
+        />
+        <Header
+           isOpen={openBurgerMenu}
+        />       
         <Movies/>
         <Footer/> 
       </Route>      
       <Route path="/saved-movies">
-        <Header/>
+      <BurgerMenu
+          isOpen={burgerMenuIsOpen}
+          isClose={burgerMenuIsClosed}
+        />
+        <Header 
+          isOpen={openBurgerMenu}
+        />
         <SavedMovies/>
         <Footer/> 
       </Route>      

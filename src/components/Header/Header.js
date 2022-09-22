@@ -4,7 +4,7 @@ import EntryButton from './EntryButton/EntryButton';
 import Navigation from '../Navigation/Navigation';
 
 
-function Header({page}) {
+function Header({page, isOpen}) {
 
   if(page) {
     return (
@@ -16,7 +16,9 @@ function Header({page}) {
     }
       return (
         <header className='header'>
-          <Navigation/>
+          <Navigation
+            isOpen={isOpen}
+          />
         </header>      
     );
 }
