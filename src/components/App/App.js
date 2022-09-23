@@ -10,6 +10,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile.css/Profile';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
+import NotFound from './NotFound/NotFound';
 import './App.css';
 
 function App() {
@@ -67,8 +68,10 @@ function burgerMenuIsClosed() {
       </Route>     
       <Route path="/signup">
         <Register/>
-      </Route>
-      
+      </Route> 
+      <Route path="/404">
+        <NotFound/>  
+      </Route>     
     </div>
   );
 }

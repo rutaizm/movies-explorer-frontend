@@ -40,7 +40,20 @@
     }
 }
 
-@media screen and (min-width:320px) and (max-width:767px) {
+@media screen and (min-width:569px) and (max-width:767px) {
+    .moviescard__list {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        column-gap: 20px;
+        row-gap: 25px;
+        width: calc(100% - 10px * 2);
+    }
+
+    .moviescard__more-button {
+        margin: 92px 0 120px;
+    }
+}
+
+@media screen and (min-width:320px) and (max-width:568px) {
     .moviescard__list {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         width: calc(100% - 10px * 2);
