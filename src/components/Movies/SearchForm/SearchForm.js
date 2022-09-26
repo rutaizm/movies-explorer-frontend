@@ -3,7 +3,7 @@ import './SearchForm.css';
 function SearchForm() {
     return(
         <section className='search-form'>
-            <form className='search-form__whole' method='get'>
+            <form className='search-form__whole' method='get' required>
                 <input className='search-form__field' placeholder='Фильм' type='text'/>
                 <button className='search-form__button' type='submit'>Найти</button>
                 <div className='search-form__wrap'>                    

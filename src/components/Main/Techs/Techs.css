@@ -60,6 +60,7 @@
 @media screen and (min-width:320px) and (max-width:539px) {
     .techs {
         padding: 23px 18px 83px;
+        background-color: white;
     }
 
     .techs__caption {

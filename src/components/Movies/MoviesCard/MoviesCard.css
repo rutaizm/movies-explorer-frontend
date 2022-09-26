@@ -4,6 +4,8 @@
     list-style: none;
     box-shadow: 0 16px 24px rgba(0, 0, 0, 0.05);
     border-radius: 24px;
+    padding-bottom: 14px;
+    box-sizing: border-box;
 }
 
 .card__image {
@@ -66,6 +68,20 @@
     color: #A0A0A0;
 }
 
-/* @media screen and (min-width:540px) and (max-width:768px) {
+@media screen and (min-width:320px) and (max-width:540px) {
+    .card {
+        min-height: 235px;
+    }
+}
 
-} */
+@media screen and (min-width:541px) and (max-width:1023px) {
+    .card {
+        min-height: 257px;
+    }
+}
+
+@media screen and (min-width:1024px) and (max-width:1279px) {
+    .card {
+        min-height: 257px;
+    }
+}
