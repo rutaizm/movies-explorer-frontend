@@ -13,8 +13,8 @@ function Login() {
                 <label className='signin__label' htmlFor='name'>E-mail</label>
                 <input className='signin__input' type='text' id='name'/>
                 <span className='signin__error'></span>
-                <label className='signin__label' htmlFor='Email'>Пароль</label>
-                <input className='signin__input' type='email' id='Email'/>
+                <label className='signin__label' htmlFor='password'>Пароль</label>
+                <input className='signin__input' type='text' id='password'/>
                 <span className='signin__error login__span'></span>
             </SignIn>
             <div className='signin__caption'>

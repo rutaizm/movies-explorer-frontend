@@ -8,9 +8,9 @@ function BurgerMenu({isOpen, isClose}) {
             
             <nav className="burger__links">
             <button type="button" className="burger__close-button" onClick={isClose}/>
-                <NavLink className='burger__link burger__link_active' to='/'>Главная</NavLink>
-                <NavLink className='burger__link burger__link_active' to='/movies'>Фильмы</NavLink>
-                <NavLink className='burger__link burger__link_active' to='/saved-movies'>Сохраненные&nbsp;фильмы</NavLink>
+                <NavLink className='burger__link' to='/'>Главная</NavLink>
+                <NavLink className='burger__link' to='/movies'>Фильмы</NavLink>
+                <NavLink className='burger__link' to='/saved-movies'>Сохраненные&nbsp;фильмы</NavLink>
             </nav>
             <nav className="burger__profile">
                 <NavLink className='burger__account' to='/profile'>Аккаунт</NavLink>
