@@ -4,11 +4,11 @@ export class Auth {
         this._headers = config.headers;
     }
 
-    _handleError(res) {
-        if (res.ok) {
-            return res.json();
+    _handleError(response) {
+        if (response.ok) {
+            return response.json();
         }
-        return Promise.reject(`Ошибка ${res.status}`);
+        return Promise.reject(`Возникла ошибка ${response.status}`);
     }
 
     register (name, password, email) {
@@ -16,7 +16,7 @@ export class Auth {
           method: 'POST',
           headers: this._headers,
           body: JSON.stringify({name:name, password:password, email:email})
-        })
+        })        
         .then(this._handleError);
     } 
 
@@ -29,16 +29,16 @@ export class Auth {
         .then(this._handleError);
     }  
 
-    // checkToken (token) {
-    //     return fetch(`${this._url}/me`, {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': `Bearer ${token}`,
-    //         }
-    //     })        
-    //     .then(this._handleError);
-    // }
+    checkToken(token) {
+        return fetch(`${this._url}/users/me`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            }            
+        })        
+        .then(this._handleError);
+    }
 
     getSavedMovies(token) {
         return fetch(`${this._url}/movies`, {
@@ -100,7 +100,7 @@ export class Auth {
 }
 
 const auth = new Auth({
-    BASE_URL:'https://api.rutaizmDiploma.nomoredomains.sbs',
+    url:'https://api.rutaizmDiploma.nomoredomains.sbs',
     headers: {
         'Content-Type': 'application/json'
     }

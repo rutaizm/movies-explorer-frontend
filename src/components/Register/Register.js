@@ -1,7 +1,7 @@
 import React from 'react';
 import SignIn from '../SignIn/SignIn';
 import './Register.css';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useValidation from '../../utils/useValidation';
 import { useEffect } from 'react';
 
@@ -35,7 +35,7 @@ function Register({onRegistration}) {
                         'signin__input signin__input_type_error' : 'signin__input'}                     
                     id='name'
                     required
-                    pattern={['^(?=.{2,40}$)[A-Za-zа-яА-ЯёЁ/\s/-]*$']}           
+                    pattern={['^(?=.{8,40}$)[A-Za-zа-яА-ЯёЁ/\s/-]*$']}           
                 />
                 <span className={errors.name ? 
                     'signin__error signin__error_type_active' : 'signin__error'}>{errors.name}                
@@ -74,7 +74,7 @@ function Register({onRegistration}) {
 
             <div className='signin__caption'>
                 <p className='signin__text'>Уже зарегистрированы?</p>
-                <NavLink to='/signin' className='signin__login'>Войти</NavLink>
+                <Link to='/signin' className='signin__login'>Войти</Link>
             </div> 
         </section>
     )

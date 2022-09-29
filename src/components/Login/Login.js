@@ -1,7 +1,7 @@
 import './Login.css';
 import React from 'react';
 import SignIn from '../SignIn/SignIn';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useValidation from '../../utils/useValidation';
 import { useEffect } from 'react';
 
@@ -58,7 +58,7 @@ function Login({onLogin}) {
 
             <div className='signin__caption'>
                 <p className='signin__text'>Ещё не зарегистрированы?</p>
-                <NavLink to='/signin' className='signin__login'>Регистрация</NavLink>
+                <Link to='/signup' className='signin__login'>Регистрация</Link>
             </div> 
         </section>
     )

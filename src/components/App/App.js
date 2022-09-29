@@ -12,6 +12,7 @@ import Profile from '../Profile.css/Profile';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import NotFound from './NotFound/NotFound';
 import auth from '../../utils/MainApi';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = React.useState(false);
 
-  function handleRegistration(data) {
+
+  function handleRegistration(data) {    
     auth.register(data.name, data.password, data.email)
         .then((data) => {
             setLoggedIn(true);
@@ -36,12 +38,25 @@ function handleLogin(data){
     auth.login(data.password, data.email)
         .then((data) =>{
             setLoggedIn(true);
+            localStorage.setItem('jwt', data.token); 
             history.push("/movies");
         })
         .catch((err) => {
             console.log(err);
         });      
 }
+
+  function handleCheckToken() {
+    const token = localStorage.getItem('jwt');
+     if (token) {
+        auth.checkToken(token)
+            .then((data) => {
+                setLoggedIn(true);
+                history.push("/movies");                    
+            })
+            .catch((err) => console.log(err)); 
+    }
+  }
   
   function openBurgerMenu() {
     setBurgerMenuIsOpen(true);
@@ -50,6 +65,10 @@ function handleLogin(data){
   function closeBurgerMenu() {
     setBurgerMenuIsOpen(false);
   }
+  
+  React.useEffect(() => {
+    handleCheckToken();
+}, [loggedIn]);
 
   return (
     <div className="app">       
@@ -74,11 +93,17 @@ function handleLogin(data){
           />
         </Route>
 
-        <Route path="/profile">
+        <ProtectedRoute 
+          path="/profile"
+          loggedIn={loggedIn}
+        >
           <Profile/>
-        </Route>
+        </ProtectedRoute>
         
-        <Route path="/movies">
+        <ProtectedRoute 
+          path="/movies"
+          loggedIn={loggedIn}
+        >
           <BurgerMenu
               isOpen={burgerMenuIsOpen}
               isClose={closeBurgerMenu}
@@ -88,9 +113,12 @@ function handleLogin(data){
           />       
           <Movies/>
           <Footer/> 
-        </Route> 
+        </ProtectedRoute> 
 
-        <Route path="/saved-movies">
+        <ProtectedRoute 
+          path="/saved-movies"
+          loggedIn={loggedIn}
+        >
           <BurgerMenu
               isOpen={burgerMenuIsOpen}
               isClose={closeBurgerMenu}
@@ -100,7 +128,7 @@ function handleLogin(data){
           />
           <SavedMovies/>
           <Footer/> 
-        </Route>      
+        </ProtectedRoute>      
       
       </Switch>        
       <Route path="/404">

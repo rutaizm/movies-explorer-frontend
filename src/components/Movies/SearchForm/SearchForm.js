@@ -8,7 +8,7 @@ function SearchForm() {
                 <button className='search-form__button' type='submit'>Найти</button>
                 <div className='search-form__wrap'>                    
                     <input className='search-form__checkbox' type='checkbox' id='switch'/>
-                    <label for='switch' className='search-form__label'>Короткометражки</label>
+                    <label htmlFor='switch' className='search-form__label'>Короткометражки</label>
                 </div>               
             </form>
             <hr className='search-form__line'/>
