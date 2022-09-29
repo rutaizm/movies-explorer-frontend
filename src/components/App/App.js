@@ -24,7 +24,8 @@ function App() {
   function handleRegistration(data) {
     auth.register(data.name, data.password, data.email)
         .then((data) => {
-            history.push("/signin");
+            setLoggedIn(true);
+            history.push("/movies");
         })
         .catch((err) => {
             console.log(err);
@@ -35,7 +36,7 @@ function handleLogin(data){
     auth.login(data.password, data.email)
         .then((data) =>{
             setLoggedIn(true);
-            history.push("/");
+            history.push("/movies");
         })
         .catch((err) => {
             console.log(err);

@@ -35,7 +35,7 @@ function Register({onRegistration}) {
                         'signin__input signin__input_type_error' : 'signin__input'}                     
                     id='name'
                     required
-                    pattern={['^(?=.{2,40}$)[-A-Za-zа-яА-ЯёЁ/\s/]*$',]}           
+                    pattern={['^(?=.{2,40}$)[A-Za-zа-яА-ЯёЁ/\s/-]*$']}           
                 />
                 <span className={errors.name ? 
                     'signin__error signin__error_type_active' : 'signin__error'}>{errors.name}                
@@ -53,7 +53,7 @@ function Register({onRegistration}) {
                     required                  
                 />
                 <span className={errors.email ? 
-                    'signin__error signin__error_type_active' : 'signin__error'}>{errors.name}
+                    'signin__error signin__error_type_active' : 'signin__error'}>{errors.email}
                 </span>
                 
                 <label className='signin__label' htmlFor='password'>Пароль</label>
@@ -73,8 +73,8 @@ function Register({onRegistration}) {
             </SignIn>  
 
             <div className='signin__caption'>
-                    <p className='signin__text'>Уже зарегистрированы?</p>
-                    <NavLink to='/signin' className='signin__login'>Войти</NavLink>
+                <p className='signin__text'>Уже зарегистрированы?</p>
+                <NavLink to='/signin' className='signin__login'>Войти</NavLink>
             </div> 
         </section>
     )
