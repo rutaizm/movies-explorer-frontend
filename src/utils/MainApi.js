@@ -51,20 +51,8 @@ export class Auth {
         .then(this._handleError);
     }
 
-    
-    getProfileInfo(token) {
-        return fetch(`${this._url}/me`, {
-            method:"GET",
-            headers: {
-                ...this._headers,
-                Authorization: `Bearer ${token}`
-            },
-        })
-        .then(this._handleError); 
-    }
-
-    editProfileInfo({name, email}, token) {
-        return fetch(`${this._url}/me`, {
+    editProfileInfo(name, email, token) {
+        return fetch(`${this._url}/users/me`, {
             method:"PATCH",
             headers: {
                 ...this._headers,

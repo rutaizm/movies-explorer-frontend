@@ -13,6 +13,7 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import NotFound from './NotFound/NotFound';
 import auth from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
 import './App.css';
 
 function App() {
@@ -21,41 +22,53 @@ function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = React.useState(false);
-
+  const [currentUser, setCurrentUser] = React.useState({});
 
   function handleRegistration(data) {    
     auth.register(data.name, data.password, data.email)
-        .then((data) => {
-            setLoggedIn(true);
-            history.push("/movies");
-        })
-        .catch((err) => {
-            console.log(err);
-         });               
-}
+      .then((data) => {
+        setLoggedIn(true);
+        history.push("/movies");
+      })
+      .catch((err) => {
+        console.log(err);
+      });               
+  }
 
-function handleLogin(data){
+  function handleLogin(data){
     auth.login(data.password, data.email)
-        .then((data) =>{
-            setLoggedIn(true);
-            localStorage.setItem('jwt', data.token); 
-            history.push("/movies");
-        })
-        .catch((err) => {
-            console.log(err);
-        });      
-}
+      .then((data) =>{
+        setLoggedIn(true);
+        localStorage.setItem('jwt', data.token); 
+        history.push("/movies");
+      })
+      .catch((err) => {
+        console.log(err);
+      });      
+  }
 
   function handleCheckToken() {
     const token = localStorage.getItem('jwt');
-     if (token) {
+      if (token) {
         auth.checkToken(token)
             .then((data) => {
                 setLoggedIn(true);
-                history.push("/movies");                    
+                history.push("/movies"); 
+                setCurrentUser(data);                  
             })
             .catch((err) => console.log(err)); 
     }
+  }
+
+  function handleEditProfile(user) {
+    const token = localStorage.getItem('jwt');
+    auth.editProfileInfo(user.name, user.email, token)
+      .then((res) => {
+        setCurrentUser(res)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
   }
   
   function openBurgerMenu() {
@@ -71,70 +84,74 @@ function handleLogin(data){
 }, [loggedIn]);
 
   return (
-    <div className="app">       
-      <Switch>
-        <Route exact path="/">
-          <Header 
-            page="main"
-          />
-          <Main/>
-          <Footer/>   
-        </Route>   
-      
-        <Route path="/signup">
-          <Register
-            onRegistration = {handleRegistration}
-          />
-        </Route> 
-
-        <Route path="/signin">
-          <Login
-            onLogin = {handleLogin}
-          />
-        </Route>
-
-        <ProtectedRoute 
-          path="/profile"
-          loggedIn={loggedIn}
-        >
-          <Profile/>
-        </ProtectedRoute>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="app">       
+        <Switch>
+          <Route exact path="/">
+            <Header 
+              page="main"
+            />
+            <Main/>
+            <Footer/>   
+          </Route>   
         
-        <ProtectedRoute 
-          path="/movies"
-          loggedIn={loggedIn}
-        >
-          <BurgerMenu
-              isOpen={burgerMenuIsOpen}
-              isClose={closeBurgerMenu}
-          />
-          <Header
-            isOpen={openBurgerMenu}
-          />       
-          <Movies/>
-          <Footer/> 
-        </ProtectedRoute> 
+          <Route path="/signup">
+            <Register
+              onRegistration = {handleRegistration}
+            />
+          </Route> 
 
-        <ProtectedRoute 
-          path="/saved-movies"
-          loggedIn={loggedIn}
-        >
-          <BurgerMenu
-              isOpen={burgerMenuIsOpen}
-              isClose={closeBurgerMenu}
-          />
-          <Header 
-            isOpen={openBurgerMenu}
-          />
-          <SavedMovies/>
-          <Footer/> 
-        </ProtectedRoute>      
-      
-      </Switch>        
-      <Route path="/404">
-        <NotFound/>  
-      </Route>     
-    </div>
+          <Route path="/signin">
+            <Login
+              onLogin = {handleLogin}
+            />
+          </Route>
+
+          <ProtectedRoute 
+            path="/profile"
+            loggedIn={loggedIn}
+          >
+            <Profile
+              onEditProfile={handleEditProfile}
+            />
+          </ProtectedRoute>
+          
+          <ProtectedRoute 
+            path="/movies"
+            loggedIn={loggedIn}
+          >
+            <BurgerMenu
+                isOpen={burgerMenuIsOpen}
+                isClose={closeBurgerMenu}
+            />
+            <Header
+              isOpen={openBurgerMenu}
+            />       
+            <Movies/>
+            <Footer/> 
+          </ProtectedRoute> 
+
+          <ProtectedRoute 
+            path="/saved-movies"
+            loggedIn={loggedIn}
+          >
+            <BurgerMenu
+                isOpen={burgerMenuIsOpen}
+                isClose={closeBurgerMenu}
+            />
+            <Header 
+              isOpen={openBurgerMenu}
+            />
+            <SavedMovies/>
+            <Footer/> 
+          </ProtectedRoute>      
+        
+        </Switch>        
+        <Route path="/404">
+          <NotFound/>  
+        </Route>     
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
