@@ -3,7 +3,7 @@ import './Profile.css';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import useValidation from '../../utils/useValidation';
 
-function Profile({onEditProfile}) {
+function Profile({onEditProfile, onLogout}) {
 
     const currentUser = React.useContext(CurrentUserContext);
     const { values, errors, isValid, handleChange, resetForms } =  useValidation('.profile__form');
@@ -70,7 +70,12 @@ function Profile({onEditProfile}) {
                     disabled={!formChanged}
                 >
                     Редактировать</button>
-                <button className='profile__sign-out' type='submit'>Выйти из аккаунта</button>
+                <button 
+                    className='profile__sign-out' 
+                    type='submit'
+                    onClick={onLogout}
+                >
+                    Выйти из аккаунта</button>
            </div>
            </form>
            

@@ -40,6 +40,18 @@ export class Auth {
         .then(this._handleError);
     }
 
+    editProfileInfo(name, email, token) {
+        return fetch(`${this._url}/users/me`, {
+            method:"PATCH",
+            headers: {
+                ...this._headers,
+                Authorization: `Bearer ${token}`
+            },
+            body:JSON.stringify({name:name, email:email}),
+        })
+        .then(this._handleError); 
+    }
+    
     getSavedMovies(token) {
         return fetch(`${this._url}/movies`, {
           method:"GET",
@@ -51,16 +63,16 @@ export class Auth {
         .then(this._handleError);
     }
 
-    editProfileInfo(name, email, token) {
-        return fetch(`${this._url}/users/me`, {
-            method:"PATCH",
-            headers: {
-                ...this._headers,
-                Authorization: `Bearer ${token}`
-            },
-            body:JSON.stringify({name:name, email:email}),
+    
+    getSavedMovies(token) {
+        return fetch(`${this._url}/movies`, {
+          method:"GET",
+          headers: {
+              ...this._headers,
+              Authorization: `Bearer ${token}`
+              }
         })
-        .then(this._handleError); 
+        .then(this._handleError);
     }
     
     saveMovie(token) {

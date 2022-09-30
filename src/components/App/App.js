@@ -70,7 +70,13 @@ function App() {
         console.log(err)
     })
   }
-  
+
+  function handleLogout() {
+    setLoggedIn(false);
+    localStorage.removeItem('jwt');
+    history.push("/");
+  }
+    
   function openBurgerMenu() {
     setBurgerMenuIsOpen(true);
   }
@@ -109,10 +115,11 @@ function App() {
 
           <ProtectedRoute 
             path="/profile"
-            loggedIn={loggedIn}
+            loggedIn={loggedIn}           
           >
             <Profile
               onEditProfile={handleEditProfile}
+              onLogout={handleLogout}
             />
           </ProtectedRoute>
           
