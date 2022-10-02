@@ -1,11 +1,27 @@
+import React from 'react';
 import SearchForm from './SearchForm/SearchForm.js';
 import MoviesCardList from './MoviesCardList/MoviesCardList.js';
 
-function Movies() {
+function Movies({movies}) {
+
+    const [searchValue, setSearchValue] = React.useState({});  
+    const filteredMovies = movies.filter(item => item.nameRU.includes(searchValue));    
+
+    function onSearch() {
+        console.log(filteredMovies)
+    }
+
     return(
         <>
-            <SearchForm/>
-            <MoviesCardList/>
+            <SearchForm
+                setSearchValue={setSearchValue}
+                onSearch = {onSearch}
+            />
+            <MoviesCardList
+                searchValue={searchValue}
+                movies={movies}
+                filteredMovies={filteredMovies}
+            /> 
         </>
     )
 }

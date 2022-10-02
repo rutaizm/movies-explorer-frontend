@@ -7,6 +7,7 @@ import Register from '../Register/Register';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
+import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList'
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile.css/Profile';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
@@ -15,6 +16,7 @@ import auth from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import './App.css';
+import api from '../../utils/MoviesApi';
 
 function App() {
 
@@ -23,7 +25,8 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
-
+  const [movies, setMovies] = React.useState([]);
+  
   function handleRegistration(data) {    
     auth.register(data.name, data.password, data.email)
       .then((data) => {
@@ -87,7 +90,32 @@ function App() {
   
   React.useEffect(() => {
     handleCheckToken();
-}, [loggedIn]);
+  }, [loggedIn]);
+
+  React.useEffect(() => { 
+      api.getMovies()
+      .then((films) => {
+            localStorage.setItem('movies', films);
+          setMovies(films);
+          // console.log(Array.isArray(films));
+          // console.log(films);
+      })
+      .catch((err) => {
+          console.log(err)
+      });
+    }, []);
+
+    // function handleSearch() {
+    //   api.getMovies()
+    //     .then((res) => {
+    //       const [movies] = res;
+    //       setMovies(movies);
+    //   })
+    //     .catch((err) => {
+    //         console.log(err)
+    //   });
+    //   console.log(movies);      
+    // }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -117,6 +145,13 @@ function App() {
             path="/profile"
             loggedIn={loggedIn}           
           >
+            <BurgerMenu
+              isOpen={burgerMenuIsOpen}
+              isClose={closeBurgerMenu}
+            />
+            <Header
+              isOpen={openBurgerMenu}
+            />  
             <Profile
               onEditProfile={handleEditProfile}
               onLogout={handleLogout}
@@ -134,7 +169,9 @@ function App() {
             <Header
               isOpen={openBurgerMenu}
             />       
-            <Movies/>
+            <Movies
+              movies={movies}
+            />
             <Footer/> 
           </ProtectedRoute> 
 

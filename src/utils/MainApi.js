@@ -62,18 +62,6 @@ export class Auth {
         })
         .then(this._handleError);
     }
-
-    
-    getSavedMovies(token) {
-        return fetch(`${this._url}/movies`, {
-          method:"GET",
-          headers: {
-              ...this._headers,
-              Authorization: `Bearer ${token}`
-              }
-        })
-        .then(this._handleError);
-    }
     
     saveMovie(token) {
         return fetch(`${this._url}/`, {

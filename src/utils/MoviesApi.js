@@ -11,15 +11,23 @@ export class Api {
         return Promise.reject(`Ошибка ${res.status}`);
     }
 
-    searchMovies(token) {
-        return fetch(`${this._url}/movies`, {
+    getMovies() {
+        return fetch(`${this._url}`, {
           method:"GET",
           headers: {
               ...this._headers,
-              Authorization: `Bearer ${token}`
+            //   Authorization: `Bearer ${token}`
               }
           })
           .then(this._handleError);
     }
-
 }
+
+const api = new Api({
+    url:'https://api.nomoreparties.co/beatfilm-movies',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+}); 
+
+export default api;

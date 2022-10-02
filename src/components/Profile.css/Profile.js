@@ -6,7 +6,7 @@ import useValidation from '../../utils/useValidation';
 function Profile({onEditProfile, onLogout}) {
 
     const currentUser = React.useContext(CurrentUserContext);
-    const { values, errors, isValid, handleChange, resetForms } =  useValidation('.profile__form');
+    const { values, errors, handleChange, resetForms } =  useValidation('.profile__form');
     const [formChanged, setFormChanged] = React.useState(false)
     const profileEditClass = !formChanged ? 'profile__edit' : 'profile__edit profile__edit_type_active';
 

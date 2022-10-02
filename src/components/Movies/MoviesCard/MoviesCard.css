@@ -10,6 +10,8 @@
 
 .card__image {
     width: 100%;
+    min-height: 192px;
+    object-fit: cover;
 }
 
 .card__wrap{

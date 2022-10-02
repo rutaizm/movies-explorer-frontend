@@ -1,15 +1,17 @@
 import './MoviesCard.css';
-import photo from '../../../images/photo.jpg'
 
-function MoviesCard() {
+function MoviesCard({movie}) {
+
+    const BASE_URL = 'https://api.nomoreparties.co/';
+
     return(
         <li className='card'>
-            <img className='card__image' src={photo} alt='кадр из фильма'/>
+            <img className='card__image' src={BASE_URL + movie.image.url} alt={movie.nameRU}/>
             <div className='card__wrap'>
-                <p className='card__title'>33 слова о дизайне</p>
+                <p className='card__title'>{movie.nameRU}</p>
                 <button type='button' className='card__button card__button_type_save'/>
             </div>   
-            <time className='card__time'>1ч42м</time>            
+            <time className='card__time'>{movie.duration}</time>            
         </li>
     )
 }
