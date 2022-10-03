@@ -4,23 +4,28 @@ import MoviesCardList from './MoviesCardList/MoviesCardList.js';
 
 function Movies({movies}) {
 
-    const [searchValue, setSearchValue] = React.useState({});  
-    const filteredMovies = movies.filter(item => item.nameRU.includes(searchValue));    
+    const [searchValue, setSearchValue] = React.useState(''); 
+    const [displayedCard, setDisplayedCard] = React.useState([]);
 
     function onSearch() {
-        console.log(filteredMovies)
+        if (searchValue.length === 0) {
+            return
+        } else {
+            const filteredMovies = movies.filter(item => item.nameRU.includes(searchValue)); 
+            setDisplayedCard(filteredMovies);
+        }
     }
 
     return(
         <>
             <SearchForm
                 setSearchValue={setSearchValue}
+                searchValue={searchValue}
                 onSearch = {onSearch}
             />
             <MoviesCardList
-                searchValue={searchValue}
-                movies={movies}
-                filteredMovies={filteredMovies}
+                displayedCard={displayedCard}
+                onSearch={onSearch}
             /> 
         </>
     )

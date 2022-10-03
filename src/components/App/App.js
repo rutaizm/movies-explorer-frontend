@@ -25,8 +25,12 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
-  const [movies, setMovies] = React.useState([]);
-  
+  const [movies, setMovies] = React.useState(
+    localStorage.getItem('allMovies') ?
+    JSON.parse(localStorage.getItem('allMovies')) :
+    []
+  );
+
   function handleRegistration(data) {    
     auth.register(data.name, data.password, data.email)
       .then((data) => {
@@ -57,8 +61,8 @@ function App() {
             .then((data) => {
                 setLoggedIn(true);
                 history.push("/movies"); 
-                setCurrentUser(data);                  
-            })
+                setCurrentUser(data); 
+            }) 
             .catch((err) => console.log(err)); 
     }
   }
@@ -92,18 +96,22 @@ function App() {
     handleCheckToken();
   }, [loggedIn]);
 
+  React.useEffect(() => {
+    if (loggedIn) 
+    localStorage.setItem('allMovies', JSON.stringify(movies));
+  }, [movies]);
+
   React.useEffect(() => { 
-      api.getMovies()
-      .then((films) => {
-            localStorage.setItem('movies', films);
-          setMovies(films);
-          // console.log(Array.isArray(films));
-          // console.log(films);
-      })
-      .catch((err) => {
-          console.log(err)
-      });
-    }, []);
+    if (movies.length === 0) {
+    api.getMovies()
+    .then((films) => {
+        localStorage.setItem('allMovies', films);
+        setMovies(films);
+     })
+    .catch((err) => {
+        console.log(err)
+    });}
+  }, []);
 
     // function handleSearch() {
     //   api.getMovies()
