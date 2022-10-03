@@ -11,6 +11,9 @@
     column-gap: 20px;
     row-gap: 32px;
     width: calc(100% - 70px * 2);
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
 .moviescard__more-button {
@@ -25,6 +28,20 @@
     background-color: white;
     text-align: center;
     margin: 80px 0 88px;
+}
+
+.moviescard__message {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: black;
+    left: 50%;
+    margin-top: 10px;
+    display: none;
+}
+
+.moviescard__message_type_active {
+    display: block;
 }
 
 @media screen and (min-width:1025px) and (max-width:1279px) {

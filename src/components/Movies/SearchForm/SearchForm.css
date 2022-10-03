@@ -20,7 +20,19 @@
     background-position-x: 17px;
     background-position-y: 17px;
     background-repeat: no-repeat;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
 }   
+
+.search-form__message {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: grey;
+    padding-left: 64px;
+    margin-top: 10px;
+}
 
 .search-form__field:focus {
     background-image:none;

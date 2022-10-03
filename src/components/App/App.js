@@ -7,15 +7,15 @@ import Register from '../Register/Register';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
-import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList'
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile.css/Profile';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import NotFound from './NotFound/NotFound';
-import auth from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
+import Preloader from '../Movies/Preloader/Preloader';
 import './App.css';
+import auth from '../../utils/MainApi';
 import api from '../../utils/MoviesApi';
 
 function App() {
@@ -59,7 +59,7 @@ function App() {
       if (token) {
         auth.checkToken(token)
             .then((data) => {
-                setLoggedIn(true);
+                setLoggedIn(true);               
                 history.push("/movies"); 
                 setCurrentUser(data); 
             }) 
@@ -94,6 +94,7 @@ function App() {
   
   React.useEffect(() => {
     handleCheckToken();
+    
   }, [loggedIn]);
 
   React.useEffect(() => {
@@ -112,18 +113,6 @@ function App() {
         console.log(err)
     });}
   }, []);
-
-    // function handleSearch() {
-    //   api.getMovies()
-    //     .then((res) => {
-    //       const [movies] = res;
-    //       setMovies(movies);
-    //   })
-    //     .catch((err) => {
-    //         console.log(err)
-    //   });
-    //   console.log(movies);      
-    // }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

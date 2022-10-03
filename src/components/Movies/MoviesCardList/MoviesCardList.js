@@ -1,31 +1,25 @@
-
+import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { type } from '@testing-library/user-event/dist/type';
-// import SearchForm from '../SearchForm/SearchForm.js';
-// import {searchValue} from '../SearchForm/SearchForm.js'
 
-function MoviesCardList({displayedCard, onSearch}) {
-
+function MoviesCardList({displayedCard, isNoMoviesMessage}) {   
     
-
-    // function handle() {
-    //       console.log(filteredMovies);
-          
-
-    //     // console.log(filteredMovies);
-    // }       
+    const infoMessage = isNoMoviesMessage ? 'moviescard__message moviescard__message_type_active' : 'moviescard__message'
  
     return(
-        <section className='moviescard'>
-            <div className='moviescard__list'>
+        <section className='moviescard'>           
+            <ul className='moviescard__list'>
+            {
+                <p className={infoMessage}>{isNoMoviesMessage}</p>
+            }
                 {displayedCard.map((film) =>
                    (<MoviesCard
                         key={film.id}
                         movie={film}
-                    />)   
+                    />)  
                 )}
-            </div>
+            </ul>
             <button 
                 type='button' 
                 className='moviescard__more-button'
