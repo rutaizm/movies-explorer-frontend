@@ -10,13 +10,14 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile.css/Profile';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
-import NotFound from './NotFound/NotFound';
+import NotFound from '../NotFound/NotFound';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
-import Preloader from '../Movies/Preloader/Preloader';
+import Preloader from '../Preloader/Preloader';
 import './App.css';
 import auth from '../../utils/MainApi';
 import api from '../../utils/MoviesApi';
+import { BASE_URL } from '../../utils/constant';
 
 function App() {
 
@@ -30,6 +31,11 @@ function App() {
     JSON.parse(localStorage.getItem('allMovies')) :
     []
   );
+  const [savedMovies, setSavedMovies] =React.useState([]);
+
+
+  
+  
 
   function handleRegistration(data) {    
     auth.register(data.name, data.password, data.email)
@@ -83,6 +89,34 @@ function App() {
     localStorage.removeItem('jwt');
     history.push("/");
   }
+
+  function handleSaveMovie(film) {
+    const token = localStorage.getItem('jwt');
+    console.log(film)
+    console.log(token)
+    auth.saveMovie(
+      {
+        country: film.country,
+        director: film.director,
+        duration: film.duration,
+        year: film.year,
+        description: film.description,
+        image: BASE_URL + film.image.url,
+        trailerLink: film.trailerLink,
+        thumbnail: BASE_URL + film.image.formats.thumbnail.url,
+        movieId: film.id,
+        nameRU: film.nameRU,
+        nameEN: film.nameEN,
+      }, token
+    )
+      .then((newSavedMovie) =>
+        setSavedMovies(newSavedMovie),
+        console.log(savedMovies)
+      )
+      .catch((err) => {
+        console.log(err)
+    })
+  }
     
   function openBurgerMenu() {
     setBurgerMenuIsOpen(true);
@@ -94,19 +128,32 @@ function App() {
   
   React.useEffect(() => {
     handleCheckToken();
-    
+    handleShowSavedMovies()
   }, [loggedIn]);
 
-  React.useEffect(() => {
-    if (loggedIn) 
-    localStorage.setItem('allMovies', JSON.stringify(movies));
-  }, [movies]);
+  // React.useEffect(() => {
+  //   if (loggedIn) 
+  //   localStorage.setItem('allMovies', JSON.stringify(movies));
+  // }, [movies]);
+
+function handleShowSavedMovies(){
+  const token = localStorage.getItem('jwt');
+  auth.getSavedMovies(token)
+      .then((res) => {
+       setSavedMovies(res)
+       console.log(savedMovies)
+       console.log(res)
+      })
+        .catch((err) => {
+          console.log(err)
+      })
+}     
 
   React.useEffect(() => { 
     if (movies.length === 0) {
     api.getMovies()
     .then((films) => {
-        localStorage.setItem('allMovies', films);
+        localStorage.setItem('allMovies', JSON.stringify(films));
         setMovies(films);
      })
     .catch((err) => {
@@ -168,7 +215,16 @@ function App() {
             />       
             <Movies
               movies={movies}
-            />
+              onSave={handleSaveMovie}
+              // setSearchValue= {setSearchValue}
+              // searchValue={searchValue}
+              // onSearch={onSearch} 
+              // isChecked={isChecked} 
+              // setRenderLoading={setRenderLoading} 
+              // renderLoading={renderLoading} 
+              // foundedCards={foundedCards}
+              // isNoMoviesMessage={isNoMoviesMessage}
+                      />
             <Footer/> 
           </ProtectedRoute> 
 
@@ -183,7 +239,17 @@ function App() {
             <Header 
               isOpen={openBurgerMenu}
             />
-            <SavedMovies/>
+            <SavedMovies
+              savedMovies={savedMovies}
+    //           setSearchValue= {setSearchValue}
+    //           searchValue={searchValue}
+    //           onSearch={onSearch} 
+    // isChecked={isChecked} 
+    // setRenderLoading={setRenderLoading} 
+    // renderLoading={renderLoading} 
+    // foundedCards={foundedCards}
+    // isNoMoviesMessage={isNoMoviesMessage}
+            />
             <Footer/> 
           </ProtectedRoute>      
         

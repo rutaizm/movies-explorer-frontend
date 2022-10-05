@@ -63,13 +63,14 @@ export class Auth {
         .then(this._handleError);
     }
     
-    saveMovie(token) {
-        return fetch(`${this._url}/`, {
+    saveMovie(film, token) {
+        return fetch(`${this._url}/movies`, {
             method: 'POST',
             headers: {
                 ...this._headers,
                 Authorization: `Bearer ${token}`
             },
+            body: JSON.stringify(film),
         })
             .then(this._handleError);
     }

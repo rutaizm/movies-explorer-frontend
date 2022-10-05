@@ -44,11 +44,11 @@
 }
 
 .card__button_type_save {
-    background-image: url(../../../images/saved.svg);
+    background-image: url(../../images/saved.svg);
 }   
 
 .card__button_type_delete {
-    background-image: url(../../../images/delete.svg);
+    background-image: url(../../images/delete.svg);
     background-position:center;
     background-color: white;
     box-shadow: none;
@@ -59,7 +59,7 @@
 }
 
 .card__button_type_active {
-    background-image: url(../../../images/saved-active.svg);
+    background-image: url(../../images/saved-active.svg);
 }
 
 .card__time {

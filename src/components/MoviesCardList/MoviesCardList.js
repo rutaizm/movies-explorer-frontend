@@ -3,7 +3,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { type } from '@testing-library/user-event/dist/type';
 
-function MoviesCardList({displayedCard, isNoMoviesMessage}) {   
+function MoviesCardList({foundedCards, isNoMoviesMessage}) {   
     
     const infoMessage = isNoMoviesMessage ? 'moviescard__message moviescard__message_type_active' : 'moviescard__message'
  
@@ -13,7 +13,7 @@ function MoviesCardList({displayedCard, isNoMoviesMessage}) {
             {
                 <p className={infoMessage}>{isNoMoviesMessage}</p>
             }
-                {displayedCard.map((film) =>
+                {foundedCards.map((film) =>
                    (<MoviesCard
                         key={film.id}
                         movie={film}
