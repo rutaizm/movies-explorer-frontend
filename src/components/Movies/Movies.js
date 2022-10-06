@@ -2,11 +2,10 @@ import React from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList.js';
 import Preloader from '../Preloader/Preloader.js';
+import {getShortMovies, setLike, onSearch, isChecked} from '../../utils/movieFunction';
 
-function Movies({movies}) {
+function Movies({movies,savedMovies, onLike, onDelete, searchValue}) {
 
-
-  const [searchValue, setSearchValue] = React.useState(''); 
   const [foundedCards, setFoundedCards] = React.useState([]);
   const [shortMovies, setShortMovies] =  React.useState([]);  
   const [renderLoading, setRenderLoading] =React.useState(false); 
@@ -20,6 +19,24 @@ function Movies({movies}) {
         arr.length === 0 ? setIsNoMoviesMessage('Ничего не найдено') : setIsNoMoviesMessage('');
     }  
 
+    // const filteredMovies = setLike(movies, savedMovies);
+    // const foundedCards = onSearch(searchValue, filteredMovies);
+
+    function setLike(filteredMovies, savedMovies) {
+        return filteredMovies.map(film => {
+            let isLike = false
+            let _id = null
+    
+            savedMovies.forEach(likedFilm => {
+                isLike = film.id === likedFilm.movieId
+                if (isLike) _id = likedFilm._id
+            })
+    
+            return { ...film, _id }
+        })
+    }
+    
+
     function onSearch() {
         if (searchValue.length === 0) {
             setRenderLoading(false);
@@ -28,9 +45,10 @@ function Movies({movies}) {
             const filteredMovies = movies.filter(item => item.nameRU.toLowerCase().includes(searchValue.toLowerCase())); 
             handleError(filteredMovies);  
             setRenderLoading(false);
-            setFoundedCards(filteredMovies); 
-            console.log(filteredMovies)   
-            return console.log(foundedCards)                 
+            
+            const arr = setLike(filteredMovies, savedMovies);
+            setFoundedCards(arr); 
+            console.log(arr)
           }
     }
 
@@ -50,7 +68,6 @@ function Movies({movies}) {
     return(
         <>
             <SearchForm
-                setSearchValue={setSearchValue}
                 searchValue={searchValue}
                 onSearch = {onSearch}
                 isChecked={isChecked}
@@ -63,7 +80,8 @@ function Movies({movies}) {
             {<MoviesCardList
                 foundedCards={foundedCards}
                 isNoMoviesMessage={isNoMoviesMessage}
-                         
+                onLike={onLike}
+                onDelete={onDelete}      
             /> }
         </>
     )

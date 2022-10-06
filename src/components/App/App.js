@@ -31,11 +31,7 @@ function App() {
     JSON.parse(localStorage.getItem('allMovies')) :
     []
   );
-  const [savedMovies, setSavedMovies] =React.useState([]);
-
-
-  
-  
+  const [savedMovies, setSavedMovies] =React.useState([]);  
 
   function handleRegistration(data) {    
     auth.register(data.name, data.password, data.email)
@@ -96,8 +92,8 @@ function App() {
     console.log(token)
     auth.saveMovie(
       {
-        country: film.country,
-        director: film.director,
+        country: film.country || '-',
+        director: film.director ,
         duration: film.duration,
         year: film.year,
         description: film.description,
@@ -105,17 +101,24 @@ function App() {
         trailerLink: film.trailerLink,
         thumbnail: BASE_URL + film.image.formats.thumbnail.url,
         movieId: film.id,
-        nameRU: film.nameRU,
-        nameEN: film.nameEN,
+        nameRU: film.nameRU || '-',
+        nameEN: film.nameEN || '-',
       }, token
     )
       .then((newSavedMovie) =>
         setSavedMovies(newSavedMovie),
-        console.log(savedMovies)
       )
       .catch((err) => {
         console.log(err)
     })
+  }
+
+  function handleDeleteMovie(film) {
+    const token = localStorage.getItem('jwt');
+    auth.deleteMovie(film._id, token)
+      .then(() => {
+        setSavedMovies((cards) => cards.filter((item) => item._id !== film._id));
+      })
   }
     
   function openBurgerMenu() {
@@ -128,7 +131,7 @@ function App() {
   
   React.useEffect(() => {
     handleCheckToken();
-    handleShowSavedMovies()
+    handleShowSavedMovies();    
   }, [loggedIn]);
 
   // React.useEffect(() => {
@@ -141,8 +144,6 @@ function handleShowSavedMovies(){
   auth.getSavedMovies(token)
       .then((res) => {
        setSavedMovies(res)
-       console.log(savedMovies)
-       console.log(res)
       })
         .catch((err) => {
           console.log(err)
@@ -215,7 +216,9 @@ function handleShowSavedMovies(){
             />       
             <Movies
               movies={movies}
-              onSave={handleSaveMovie}
+              onLike={handleSaveMovie}
+              savedMovies={savedMovies}
+              onDelete={handleDeleteMovie}
               // setSearchValue= {setSearchValue}
               // searchValue={searchValue}
               // onSearch={onSearch} 
@@ -241,6 +244,8 @@ function handleShowSavedMovies(){
             />
             <SavedMovies
               savedMovies={savedMovies}
+              onLike={handleSaveMovie}
+              onDelete={handleDeleteMovie}
     //           setSearchValue= {setSearchValue}
     //           searchValue={searchValue}
     //           onSearch={onSearch} 

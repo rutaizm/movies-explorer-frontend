@@ -4,7 +4,8 @@ import './SearchForm.css';
 
 function SearchForm({searchValue, setSearchValue, onSearch, isChecked, setRenderLoading}) {  
 
-    const [ checkboxIsChecked, setCheckboxIsChecked] = useState(false);
+    
+    const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
     const [errorMessage, setErrorMessage] = React.useState('');
 
     const isValid = (() => {

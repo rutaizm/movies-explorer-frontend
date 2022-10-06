@@ -3,7 +3,7 @@ import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-function SavedMovies({savedMovies}) {
+function SavedMovies({savedMovies, onLike, onDelete}) {
 
     const [searchValue, setSearchValue] = React.useState(''); 
   const [foundedCards, setFoundedCards] = React.useState([]);
@@ -45,7 +45,7 @@ function SavedMovies({savedMovies}) {
         }
     }
 
-    
+
     return(
         <>
             <SearchForm             
@@ -57,6 +57,8 @@ function SavedMovies({savedMovies}) {
             />
             <MoviesCardList
                 foundedCards={savedMovies}
+                onLike={onLike}
+                onDelete={onDelete} 
                 
             />
         </>

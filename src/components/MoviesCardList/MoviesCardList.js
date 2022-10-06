@@ -1,9 +1,8 @@
 import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import { type } from '@testing-library/user-event/dist/type';
 
-function MoviesCardList({foundedCards, isNoMoviesMessage}) {   
+function MoviesCardList({foundedCards, isNoMoviesMessage, onLike, onDelete}) {   
     
     const infoMessage = isNoMoviesMessage ? 'moviescard__message moviescard__message_type_active' : 'moviescard__message'
  
@@ -17,6 +16,8 @@ function MoviesCardList({foundedCards, isNoMoviesMessage}) {
                    (<MoviesCard
                         key={film.id}
                         movie={film}
+                        onDelete={onDelete}
+                        onLike={onLike}
                     />)  
                 )}
             </ul>
