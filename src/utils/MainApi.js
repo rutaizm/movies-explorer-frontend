@@ -91,7 +91,6 @@ export class Auth {
     }
     
     deleteMovie(_id, token, savedCard_id) {
-
         if(_id === null) {
             return fetch(`${this._url}/movies/${savedCard_id}`, {
                 method: 'DELETE',

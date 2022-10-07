@@ -13,20 +13,6 @@ function Movies({foundedCards,onSearch, onLike, onDelete, isChecked, renderLoadi
         arr.length === 0 ? setIsNoMoviesMessage('Ничего не найдено') : setIsNoMoviesMessage('');
     }  
 
-      
-    // function isChecked() {
-    //     if (request.length === 0) {
-    //         setRenderLoading(false);
-    //         return
-    //     } else {        
-    //         getShortMovies();
-    //         const filteredShortMovies = shortMovies.filter(item => item.nameRU.toLowerCase().includes(request.toLowerCase()));
-    //         handleError(filteredShortMovies);
-    //         setRenderLoading(false);
-    //         setFoundedCards(filteredShortMovies);
-    //     }
-    // }
-   
     return(
         <>
             <SearchForm
@@ -38,7 +24,7 @@ function Movies({foundedCards,onSearch, onLike, onDelete, isChecked, renderLoadi
                     <Preloader/>
                 </div>}
             {<MoviesCardList
-                foundedCards={foundedCards}
+                cardsToRender={foundedCards}
                 isNoMoviesMessage={isNoMoviesMessage}
                 onLike={onLike}
                 onDelete={onDelete}

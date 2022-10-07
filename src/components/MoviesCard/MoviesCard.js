@@ -1,28 +1,24 @@
 import React from 'react';
-import {  useLocation, useHistory } from 'react-router';
+import {  useLocation } from 'react-router';
 import { BASE_URL } from '../../utils/constant';
 import './MoviesCard.css';
-import { CurrentUserContext} from '../../context/CurrentUserContext'
 
-function MoviesCard({movie,onClick, onLike, onDelete, savedMovies}) {
-
-    const savedCard = savedMovies.some((m) => m.movieId === movie.id)
-
-
+function MoviesCard({movie,onLike, onDelete, savedMovies}) {
+    
     const location = useLocation();
-    // const savedCard =  movie._id !== null 
-    // const imageSrc = savedCard ? movie.image : BASE_URL + movie.image.url
+    const savedCard = savedMovies?.some((m) => m.movieId === movie.id)
     const cardClassName = savedCard ? 'card__button card__button_type_active' : 'card__button card__button_type_save '
+    // const cardImageSrc = savedCard ? movie.image : BASE_URL + movie.image.url
     function convertMovieDuration(mins) {
         let hours = Math.trunc(mins/60);
         let minutes = mins % 60;
         return `${hours}ч ${minutes}мин`;
     };    
     const duration = convertMovieDuration(movie.duration);
-     function handleLike(movie) {
-        onLike(movie);
-        console.log(movie)
-    }
+    //  function handleLike(movie) {
+    //     onLike(movie);
+    //     console.log(movie)
+    // }
     function handleDelete() {
         onDelete(movie);
     }
@@ -40,7 +36,7 @@ function MoviesCard({movie,onClick, onLike, onDelete, savedMovies}) {
 
     return(
         <li className='card'>
-            {/* <img className='card__image' src={imageSrc} alt={movie.nameRU}/> */}
+            {/* <img className='card__image' src={cardImageSrc} alt={movie.nameRU}/> */}
             {location.pathname === '/saved-movies' &&                 
                 <img className='card__image' src={movie.image} alt={movie.nameRU}/>
                 }               

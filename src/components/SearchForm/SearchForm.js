@@ -26,16 +26,23 @@ function SearchForm({onSearch, isChecked, setRenderLoading}) {
     }
 
     function handleCheckbox(e) {
-        e.target.checked ? setCheckboxIsChecked(true) : setCheckboxIsChecked(false);
+        if (e.target.checked){
+            setCheckboxIsChecked(true);
+            localStorage.setItem('isChecked', JSON.stringify('isChecked'));
+        } else {
+            setCheckboxIsChecked(false);
+            localStorage.removeItem('isChecked');
+        } 
     }
 
    function handleFormSubmit(e) {
         e.preventDefault();
         onSearch(searchValue);
+        console.log(searchValue)
     }   
 
     function handleClick() {
-        isChecked(checkboxIsChecked)
+        // isChecked(checkboxIsChecked) 
     }
 
     return(

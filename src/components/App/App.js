@@ -34,10 +34,10 @@ function App() {
     localStorage.getItem('savedMovies') ?
     JSON.parse(localStorage.getItem('savedMovies')) :
     []);
+
   const [foundedCards, setFoundedCards] = React.useState([]);
   const [shortMovies, setShortMovies]= React.useState([]);
-  const [isShort, setIsShort] = React.useState(false);
-
+ 
   const [renderLoading, setRenderLoading] =React.useState(false); 
 
   function handleRegistration(data) {    
@@ -141,7 +141,7 @@ function App() {
   function handleDeleteMovie(film) {
     const token = localStorage.getItem('jwt');
     const savedCard = savedMovies.find(i => i.movieId === film.id);
-    auth.deleteMovie(film._id, token, savedCard._id,)
+    auth.deleteMovie(film._id, token, savedCard?._id,)
       .then(() => {
         setSavedMovies((cards) => cards.filter((item) => item._id !== film._id));
         handleShowSavedMovies()
@@ -157,35 +157,22 @@ function App() {
     setBurgerMenuIsOpen(false);
   }
 
-  function isChecked(isChecked) {
-    if (isChecked) {
-      setIsShort(true)
-    } if (!isChecked) {
-      setIsShort(false)
-    }
-  }
-
   function handleSearch(request) {
         if (request.length === 0) {            
             return
-        } if (!isShort) {
+        } if (JSON.parse(localStorage.getItem('isChecked')) === null) {
+          const filteredMovies = filterMovies(request, movies); 
+            // handleError(filteredMovies);             
+            const arr = setLike(filteredMovies, savedMovies);
+            setFoundedCards(arr);            
+        } if (JSON.parse(localStorage.getItem('isChecked'))) {        
           const allShortMovies = getShortMovies(movies);
           const filteredShortMovies = filterMovies(request, allShortMovies); 
           const arr = setLike(filteredShortMovies, savedMovies);
-          setFoundedCards(arr); 
-        } if (isShort){        
-            const filteredMovies = filterMovies(request, movies); 
-            // handleError(filteredMovies);             
-            const arr = setLike(filteredMovies, savedMovies);
-            setFoundedCards(arr); 
+          setFoundedCards(arr);
           }
-    }
-   
-  
-  React.useEffect(() => {
-    handleCheckToken();
-    handleShowSavedMovies();    
-  }, [loggedIn]);
+    } 
+ 
 
 function handleShowSavedMovies(){
   const token = localStorage.getItem('jwt');
@@ -197,6 +184,11 @@ function handleShowSavedMovies(){
           console.log(err)
       })
 }     
+
+React.useEffect(() => {
+  handleCheckToken();
+  handleShowSavedMovies();    
+}, [loggedIn]);
 
   React.useEffect(() => { 
     if (movies.length === 0) {
@@ -280,9 +272,8 @@ function handleShowSavedMovies(){
               onLike={handleSaveMovie}
               savedMovies={savedMovies}
               onDelete={handleDeleteMovie}
-              // setSearchValue= {setSearchValue}
               onSearch={handleSearch} 
-              isChecked={isChecked} 
+              // isChecked={isChecked} 
               // setRenderLoading={setRenderLoading} 
               // renderLoading={renderLoading} 
               // foundedCards={foundedCards}
@@ -306,9 +297,10 @@ function handleShowSavedMovies(){
               savedMovies={savedMovies}
               onLike={handleSaveMovie}
               onDelete={handleDeleteMovie}
+              onSearch={handleSearch}
     //           setSearchValue= {setSearchValue}
     //           searchValue={searchValue}
-    //           onSearch={onSearch} 
+    //           
     // isChecked={isChecked} 
     // setRenderLoading={setRenderLoading} 
     // renderLoading={renderLoading} 

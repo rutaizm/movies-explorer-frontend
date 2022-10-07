@@ -2,19 +2,21 @@ import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({foundedCards, isNoMoviesMessage, onLike, onDelete, onClick, savedMovies}) {   
+function MoviesCardList({cardsToRender, isNoMoviesMessage, onLike, onDelete, onClick, savedMovies}) {   
     
     const infoMessage = isNoMoviesMessage ? 'moviescard__message moviescard__message_type_active' : 'moviescard__message'
  
+    // const CardKey = film._id ? film._id : film.id;
+
     return(
         <section className='moviescard'>           
             <ul className='moviescard__list'>
             {
                 <p className={infoMessage}>{isNoMoviesMessage}</p>
             }
-                {foundedCards.map((film) =>
+                {cardsToRender.map((film) =>
                    (<MoviesCard
-                        key={film.id}
+                        key={film.id || film._id}
                         movie={film}
                         onDelete={onDelete}
                         onLike={onLike}
