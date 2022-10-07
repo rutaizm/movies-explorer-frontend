@@ -2,7 +2,7 @@ import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({foundedCards, isNoMoviesMessage, onLike, onDelete}) {   
+function MoviesCardList({foundedCards, isNoMoviesMessage, onLike, onDelete, onClick, savedMovies}) {   
     
     const infoMessage = isNoMoviesMessage ? 'moviescard__message moviescard__message_type_active' : 'moviescard__message'
  
@@ -18,6 +18,8 @@ function MoviesCardList({foundedCards, isNoMoviesMessage, onLike, onDelete}) {
                         movie={film}
                         onDelete={onDelete}
                         onLike={onLike}
+                        onClick={onClick}
+                        savedMovies={savedMovies}
                     />)  
                 )}
             </ul>

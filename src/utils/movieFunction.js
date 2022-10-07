@@ -14,28 +14,13 @@ function setLike(moviesForFilter, savedMovies) {
             if (isLike) _id = likedFilm._id
         })        
         return { ...film, _id }
-    });
-    
+    });    
 } 
 
-function onSearch(request, moviesArr) {
-    // if (request.length === 0) {
-    //     return
-    // } else {        
-        
+function filterMovies(request, moviesArr) {    
         const filteredMovies = moviesArr.filter(item => item.nameRU.toLowerCase().includes(request.toLowerCase())); 
-       
         return filteredMovies;                
-    //   }
-}
-function isChecked(request, moviesArr) {
-    if (request.length === 0) {
-        return
-    } else {        
-        getShortMovies(moviesArr);
-        return moviesArr
- }
 }
 
-export {getShortMovies, setLike, onSearch, isChecked}; 
+export {getShortMovies, setLike, filterMovies}; 
 

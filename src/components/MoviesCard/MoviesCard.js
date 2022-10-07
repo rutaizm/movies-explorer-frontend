@@ -1,12 +1,16 @@
 import React from 'react';
-import {  useLocation } from 'react-router';
+import {  useLocation, useHistory } from 'react-router';
 import { BASE_URL } from '../../utils/constant';
 import './MoviesCard.css';
+import { CurrentUserContext} from '../../context/CurrentUserContext'
 
-function MoviesCard({movie, onLike, onDelete}) {
+function MoviesCard({movie,onClick, onLike, onDelete, savedMovies}) {
+
+    const savedCard = savedMovies.some((m) => m.movieId === movie.id)
+
 
     const location = useLocation();
-    const savedCard =  movie._id !== null 
+    // const savedCard =  movie._id !== null 
     // const imageSrc = savedCard ? movie.image : BASE_URL + movie.image.url
     const cardClassName = savedCard ? 'card__button card__button_type_active' : 'card__button card__button_type_save '
     function convertMovieDuration(mins) {
@@ -15,24 +19,24 @@ function MoviesCard({movie, onLike, onDelete}) {
         return `${hours}ч ${minutes}мин`;
     };    
     const duration = convertMovieDuration(movie.duration);
-
-     function handleLike() {
+     function handleLike(movie) {
         onLike(movie);
+        console.log(movie)
     }
-
     function handleDelete() {
         onDelete(movie);
     }
-
     function handleClick() {
-        if (savedCard) {
-            handleDelete(movie);   
-            console.log(movie.nameEN) 
-        } else {
-            handleLike(movie)
-            console.log(movie.nameRU) 
+        const filmInDataBase = savedMovies.some((film) => film.movieId === movie.id);
+        if(filmInDataBase){       
+            onDelete(movie);
+            console.log(savedMovies)
+        } 
+        if (!filmInDataBase) {
+            onLike(movie);
+            console.log(savedMovies)
         }
-    }    
+      }
 
     return(
         <li className='card'>
@@ -45,13 +49,13 @@ function MoviesCard({movie, onLike, onDelete}) {
                 }
             <div className='card__wrap'>
                 <p className='card__title'>{movie.nameRU}</p>           
-                {location.pathname === '/saved-movies' &&                 
-                <button type='button' onClick={handleDelete} className ='card__button card__button_type_delete'/>
-                }
-               
-               {location.pathname === '/movies' &&                 
-                <button type='button' onClick={handleClick} className ={cardClassName}/>
-                }
+                    {location.pathname === '/saved-movies' &&                 
+                    <button type='button' onClick={handleDelete} className ='card__button card__button_type_delete'/>
+                    }
+                
+                {location.pathname === '/movies' &&                 
+                    <button type='button' onClick={handleClick} className ={cardClassName}/>
+                    }
               </div>   
             <time className='card__time'>{duration}</time>            
         </li>

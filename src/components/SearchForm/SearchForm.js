@@ -2,9 +2,9 @@ import React from 'react';
 import { useState } from 'react';
 import './SearchForm.css';
 
-function SearchForm({searchValue, setSearchValue, onSearch, isChecked, setRenderLoading}) {  
+function SearchForm({onSearch, isChecked, setRenderLoading}) {  
 
-    
+    const [searchValue, setSearchValue] = React.useState('');
     const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
     const [errorMessage, setErrorMessage] = React.useState('');
 
@@ -25,19 +25,18 @@ function SearchForm({searchValue, setSearchValue, onSearch, isChecked, setRender
         !isValid ? setErrorMessage("Напишите что-нибудь...") : setErrorMessage('');
     }
 
-   function handleCheckbox() {
-     !checkboxIsChecked ? setCheckboxIsChecked(true) : setCheckboxIsChecked(false);
-   }
+    function handleCheckbox(e) {
+        e.target.checked ? setCheckboxIsChecked(true) : setCheckboxIsChecked(false);
+    }
 
    function handleFormSubmit(e) {
         e.preventDefault();
-        setRenderLoading(true);
-        if (!checkboxIsChecked) {
-            onSearch();
-        } else {
-            isChecked()
-        }        
+        onSearch(searchValue);
     }   
+
+    function handleClick() {
+        isChecked(checkboxIsChecked)
+    }
 
     return(
         <section className='search-form'>
@@ -68,9 +67,10 @@ function SearchForm({searchValue, setSearchValue, onSearch, isChecked, setRender
                 <div className='search-form__wrap'>                    
                     <input 
                         className='search-form__checkbox' 
-                        type='checkbox' 
+                        type='checkbox'
                         id='switch'
                         onChange={handleCheckbox}
+                        onClick={handleClick}
                         />
                     <label htmlFor='switch' className='search-form__label'>Короткометражки</label>
                 </div>               
