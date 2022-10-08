@@ -322,7 +322,7 @@ React.useEffect(() => {
               onDelete={handleDeleteMovie}
               onSearch={handleSearchSavedMovies}           
               renderLoading={renderLoading} 
-              isNoMoviesMessage={isNoMoviesMessage}
+              // isNoMoviesMessage={isNoMoviesMessage}
             />
             <Footer/> 
           </ProtectedRoute>      

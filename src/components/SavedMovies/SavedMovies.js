@@ -17,7 +17,7 @@ function SavedMovies({savedMovies, onLike,isChecked, onDelete, onClick, onSearch
                 onLike={onLike}
                 onDelete={onDelete} 
                 onClick={onClick}
-                isNoMoviesMessage={isNoMoviesMessage}
+                // isNoMoviesMessage={isNoMoviesMessage}
             />
         </>
     )

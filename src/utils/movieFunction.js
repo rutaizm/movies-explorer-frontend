@@ -1,5 +1,3 @@
-import React from "react";
-
 function getShortMovies(arr) {
     const shortFilms = arr.filter(item => item.duration < 40);
     return shortFilms;        

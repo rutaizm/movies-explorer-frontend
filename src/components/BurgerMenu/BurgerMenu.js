@@ -1,9 +1,17 @@
+import e from "express";
 import { NavLink } from "react-router-dom";
 import './BurgerMenu.css'
 
 function BurgerMenu({isOpen, isClose}) {
+
+    function handleOverlayClick(e) {
+        if (e.target === e.currentTarget) {
+            isClose();
+        }
+    }
+
     return(
-        <section className={`burger__wrap ${isOpen && 'burger__wrap_active'}`}>
+        <section className={`burger__wrap ${isOpen && 'burger__wrap_active'}`} onClick={handleOverlayClick}>
             <div className="burger__container">
             
             <nav className="burger__links">
