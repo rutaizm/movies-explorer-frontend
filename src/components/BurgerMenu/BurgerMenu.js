@@ -1,4 +1,3 @@
-import e from "express";
 import { NavLink } from "react-router-dom";
 import './BurgerMenu.css'
 
