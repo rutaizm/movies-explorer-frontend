@@ -3,14 +3,9 @@ import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-function SavedMovies({savedMovies, onLike,isChecked, onDelete, onClick, onSearch}) {
+function SavedMovies({savedMovies, onLike,isChecked, onDelete, onClick, onSearch, isNoMoviesMessage}) {
 
-    const [isNoMoviesMessage, setIsNoMoviesMessage] = React.useState('');
-  
-
-    function handleError(arr) {
-        arr.length === 0 ? setIsNoMoviesMessage('Ничего не найдено') : setIsNoMoviesMessage('');
-    }  
+    
     return(
         <>
             <SearchForm             
@@ -22,6 +17,7 @@ function SavedMovies({savedMovies, onLike,isChecked, onDelete, onClick, onSearch
                 onLike={onLike}
                 onDelete={onDelete} 
                 onClick={onClick}
+                isNoMoviesMessage={isNoMoviesMessage}
             />
         </>
     )

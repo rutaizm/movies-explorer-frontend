@@ -19,13 +19,14 @@ function MoviesCardList({cardsToRender, isNoMoviesMessage, onLike, onDelete, onC
             console.log('xtrasmall')
         }
       }, [screenSize]);
+      
 
     return(
-        <section className='moviescard'>           
-            <ul className='moviescard__list'>
+        <section className='moviescard'>    
             {
                 <p className={infoMessage}>{isNoMoviesMessage}</p>
-            }
+            }       
+            <ul className='moviescard__list'>
                 {cardsToRender.map((film) =>
                    (<MoviesCard
                         key={film.id || film._id}
