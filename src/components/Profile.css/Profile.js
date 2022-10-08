@@ -1,7 +1,7 @@
 import React from 'react';
 import './Profile.css';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
-import useValidation from '../../utils/useValidation';
+import useValidation from '../../hooks/useValidation';
 
 function Profile({onEditProfile, onLogout}) {
 

@@ -2,7 +2,7 @@ import React from 'react';
 import SignIn from '../SignIn/SignIn';
 import './Register.css';
 import { Link } from 'react-router-dom';
-import useValidation from '../../utils/useValidation';
+import useValidation from '../../hooks/useValidation';
 import { useEffect } from 'react';
 
 function Register({onRegistration}) {

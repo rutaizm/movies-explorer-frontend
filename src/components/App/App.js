@@ -89,7 +89,7 @@ function App() {
 
   function handleLogout() {
     setLoggedIn(false);
-    localStorage.removeItem('jwt');
+    localStorage.clear();
     history.push("/");
   }
 
@@ -158,18 +158,21 @@ function App() {
   }
 
   function handleSearch(request) {
+      setRenderLoading(true)
         if (request.length === 0) {            
             return
         } if (JSON.parse(localStorage.getItem('isChecked')) === null) {
           const filteredMovies = filterMovies(request, movies); 
             // handleError(filteredMovies);             
             const arr = setLike(filteredMovies, savedMovies);
-            setFoundedCards(arr);            
+            setFoundedCards(arr);
+            setRenderLoading(false);            
         } if (JSON.parse(localStorage.getItem('isChecked'))) {        
           const allShortMovies = getShortMovies(movies);
           const filteredShortMovies = filterMovies(request, allShortMovies); 
           const arr = setLike(filteredShortMovies, savedMovies);
           setFoundedCards(arr);
+          setRenderLoading(false); 
           }
     } 
  
@@ -273,9 +276,7 @@ React.useEffect(() => {
               savedMovies={savedMovies}
               onDelete={handleDeleteMovie}
               onSearch={handleSearch} 
-              // isChecked={isChecked} 
-              // setRenderLoading={setRenderLoading} 
-              // renderLoading={renderLoading} 
+              renderLoading={renderLoading} 
               // foundedCards={foundedCards}
               // isNoMoviesMessage={isNoMoviesMessage}
                       />
@@ -297,13 +298,8 @@ React.useEffect(() => {
               savedMovies={savedMovies}
               onLike={handleSaveMovie}
               onDelete={handleDeleteMovie}
-              onSearch={handleSearch}
-    //           setSearchValue= {setSearchValue}
-    //           searchValue={searchValue}
-    //           
-    // isChecked={isChecked} 
-    // setRenderLoading={setRenderLoading} 
-    // renderLoading={renderLoading} 
+              onSearch={handleSearch}           
+              renderLoading={renderLoading} 
     // foundedCards={foundedCards}
     // isNoMoviesMessage={isNoMoviesMessage}
             />
