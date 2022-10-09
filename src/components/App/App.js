@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
@@ -24,7 +24,7 @@ function App() {
 
   const history = useHistory();
 
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(undefined);
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
 
@@ -64,19 +64,7 @@ function App() {
       });      
   }
 
-  function handleCheckToken() {
-    const token = localStorage.getItem('jwt');
-      if (token) {
-        auth.checkToken(token)
-            .then((data) => {
-                setLoggedIn(true);               
-                history.push("/movies"); 
-                setCurrentUser(data); 
-            }) 
-            .catch((err) => console.log(err)); 
-    }
-  }
-
+  
   function handleEditProfile(user) {
     const token = localStorage.getItem('jwt');
     auth.editProfileInfo(user.name, user.email, token)
@@ -207,8 +195,24 @@ function handleShowSavedMovies(){
       })
 }     
 
+function handleCheckToken() {
+  const token = localStorage.getItem('jwt');
+    if (token) {
+      auth.checkToken(token)
+          .then((data) => {
+              setLoggedIn(true);           
+              setCurrentUser(data); 
+              // history.push("/movies");
+          }) 
+          .catch((err) => console.log(err)); 
+  }
+}
+
 React.useEffect(() => {
-  handleCheckToken();
+  if (localStorage.getItem('jwt')) {
+    handleCheckToken();
+    console.log(loggedIn)
+  } 
 }, [loggedIn]);
 
 React.useEffect(() => {
@@ -231,76 +235,20 @@ React.useEffect(() => {
     });}
   }, [loggedIn]);
 
-  // React.useEffect(() => {
-  //   if (loggedIn) {
-  //     Promise.all
-  //     ([api.getUserInfo(), api.getSavedMovies()])
-  //     .then(([currentUser, savedMovies]) => {
-  //         setCurrentUser(currentUser);
-  //         setSavedMovies(savedMovies);
-  //     })
-  //     .catch((err) =>
-  //       console.log(`${err}`))
-  //   } else {
-  //   }
-  // }, [loggedIn]);
+  if (loggedIn === undefined) return null;
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">       
-        <Switch>
-          <Route exact path="/">
-            <Header 
-              page="main"
-            />
-            <Main/>
-            <Footer/>   
-          </Route>   
-        
-          <Route path="/signup">
-          { renderLoading && 
-                <div className='preloader__wrap'>
-                    <Preloader/>
-                </div>}
-            <Register
-              onRegistration = {handleRegistration}
-            />
-          </Route> 
-
-          <Route path="/signin">
-            <Login
-              onLogin = {handleLogin}
-            />
-          </Route>
-
+        <Switch>   
           <ProtectedRoute 
-            path="/profile"
-            loggedIn={loggedIn}           
-          >
-            <BurgerMenu
-              isOpen={burgerMenuIsOpen}
-              isClose={closeBurgerMenu}
-            />
-            <Header
-              isOpen={openBurgerMenu}
-            />  
-            <Profile
-              onEditProfile={handleEditProfile}
-              onLogout={handleLogout}
-            />
-          </ProtectedRoute>
-          
-          <ProtectedRoute 
-            path="/movies"
-            loggedIn={loggedIn}
-          >
+            exact path="/movies"
+            loggedIn={loggedIn}>
             <BurgerMenu
                 isOpen={burgerMenuIsOpen}
-                isClose={closeBurgerMenu}
-            />
+                isClose={closeBurgerMenu}/>
             <Header
-              isOpen={openBurgerMenu}
-            />       
+              isOpen={openBurgerMenu}/>       
             <Movies
               foundedCards={foundedCards}
               onLike={handleSaveMovie}
@@ -308,19 +256,16 @@ React.useEffect(() => {
               onDelete={handleDeleteMovie}
               onSearch={handleSearch} 
               renderLoading={renderLoading} 
-              isNoMoviesMessage={isNoMoviesMessage}
-                      />
+              isNoMoviesMessage={isNoMoviesMessage}/>
             <Footer/> 
           </ProtectedRoute> 
 
           <ProtectedRoute 
-            path="/saved-movies"
-            loggedIn={loggedIn}
-          >
+            exact path="/saved-movies"
+            loggedIn={loggedIn}>
             <BurgerMenu
                 isOpen={burgerMenuIsOpen}
-                isClose={closeBurgerMenu}
-            />
+                isClose={closeBurgerMenu}/>
             <Header 
               isOpen={openBurgerMenu}
             />
@@ -333,12 +278,49 @@ React.useEffect(() => {
               // isNoMoviesMessage={isNoMoviesMessage}
             />
             <Footer/> 
-          </ProtectedRoute>      
+            </ProtectedRoute>
+
+
+            <ProtectedRoute 
+              exact path="/profile"
+              loggedIn={loggedIn}           
+            >
+              <BurgerMenu
+                isOpen={burgerMenuIsOpen}
+                isClose={closeBurgerMenu}
+              />
+              <Header
+                isOpen={openBurgerMenu}
+              />  
+              <Profile
+                onEditProfile={handleEditProfile}
+                onLogout={handleLogout}
+              />
+            </ProtectedRoute>
+
+            <Route exact path="/">
+              <Header 
+                page="main"
+              />
+              <Main/>
+              <Footer/>   
+            </Route>   
         
+            <Route exact path="/signup">
+              <Register
+                onRegistration = {handleRegistration}
+              />
+            </Route> 
+
+            <Route exact path="/signin">
+              <Login
+                onLogin = {handleLogin}
+              />
+            </Route>
+                
+            <Route path="*" component={NotFound}/>
         </Switch>        
-        <Route path="/404">
-          <NotFound/>  
-        </Route>     
+           
       </div>
     </CurrentUserContext.Provider>
   );
