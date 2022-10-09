@@ -41,7 +41,8 @@ function App() {
  
   const [isNoMoviesMessage, setIsNoMoviesMessage] = React.useState('');
   const [renderLoading, setRenderLoading] =React.useState(false); 
-  const [toolTip, setToolTip] = React.useState(false); 
+  const [toolTip, setToolTip] = React.useState(true); 
+  const [message, setMessage] = React.useState('');
 
   function handleRegistration(data) {    
     auth.register(data.name, data.password, data.email)
@@ -50,7 +51,8 @@ function App() {
         history.push("/movies");
       })
       .catch((err) => {
-        console.log(err);
+        openToolTip();
+        setMessage(err);
       });               
   }
 
@@ -63,7 +65,8 @@ function App() {
         openToolTip();
       })
       .catch((err) => {
-        console.log(err);
+        openToolTip();
+        setMessage(err);
       });      
   }
 
@@ -75,7 +78,8 @@ function App() {
         setCurrentUser(res)
     })
     .catch((err) => {
-        console.log(err)
+      openToolTip();
+      setMessage(err);
     })
   }
 
@@ -118,8 +122,9 @@ function App() {
           }
         })
         .catch((err) => {
-          console.log(err)
-         })
+          openToolTip();
+          setMessage(err);
+        })
   }
 
   function handleDeleteMovie(film) {
@@ -129,6 +134,10 @@ function App() {
         .then(() => {
           setSavedMovies((cards) => cards.filter((item) => item._id !== film._id));
           handleShowSavedMovies()
+        })
+        .catch((err) => {
+          openToolTip();
+          setMessage(err);
         })
   }
     
@@ -339,9 +348,10 @@ React.useEffect(() => {
         <InfoTooltip
           isOpen={toolTip}
           onClose={closeToolTip}
+          message={message}
         /> 
       </div>
-      
+
     </CurrentUserContext.Provider>
   );
 }
