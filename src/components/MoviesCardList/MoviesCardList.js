@@ -41,7 +41,7 @@ function MoviesCardList({cardsToRender, isNoMoviesMessage, onLike, onDelete, onC
             <button 
                 type='button' 
                 className='moviescard__more-button'
-                // onClick={handle}
+                // onClick={handleShowMorePosts}
             >
                 Ещё</button>
         </section>      

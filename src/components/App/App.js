@@ -132,12 +132,7 @@ function App() {
     })
   }
 
-  React.useEffect(() => {
-    setSavedMovies(savedMovies);
-    if (loggedIn) {
-      localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-    }
-    }, [savedMovies]);
+ 
 
   function handleDeleteMovie(film) {
     const token = localStorage.getItem('jwt');
@@ -164,12 +159,13 @@ function App() {
 }
 
   function handleSearch(request) {
+      setIsNoMoviesMessage('')
       setRenderLoading(true)
         if (request.length === 0) { 
           setRenderLoading(false);           
           return
         } if (JSON.parse(localStorage.getItem('isChecked')) === null) {
-          const filteredMovies = filterMovies(request, movies); 
+            const filteredMovies = filterMovies(request, movies); 
             handleError(filteredMovies);             
             const arr = setLike(filteredMovies, savedMovies);
             setFoundedCards(arr);
@@ -213,11 +209,18 @@ function handleShowSavedMovies(){
 
 React.useEffect(() => {
   handleCheckToken();
-  handleShowSavedMovies();    
 }, [loggedIn]);
 
+React.useEffect(() => {
+  setSavedMovies(savedMovies);
+  if (loggedIn) {
+    localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+  }
+  }, [savedMovies]);
+
   React.useEffect(() => { 
-    if (movies.length === 0) {
+    setMovies(movies)
+    if (loggedIn && JSON.parse(localStorage.getItem('allMovies')) === null) {
     api.getMovies()
     .then((films) => {
         localStorage.setItem('allMovies', JSON.stringify(films));
@@ -226,11 +229,12 @@ React.useEffect(() => {
     .catch((err) => {
         console.log(err)
     });}
-  }, []);
+  }, [loggedIn]);
 
   // React.useEffect(() => {
   //   if (loggedIn) {
-  //     Promise.all([api.getUserInfo(), api.getSavedMovies()])
+  //     Promise.all
+  //     ([api.getUserInfo(), api.getSavedMovies()])
   //     .then(([currentUser, savedMovies]) => {
   //         setCurrentUser(currentUser);
   //         setSavedMovies(savedMovies);
@@ -254,6 +258,10 @@ React.useEffect(() => {
           </Route>   
         
           <Route path="/signup">
+          { renderLoading && 
+                <div className='preloader__wrap'>
+                    <Preloader/>
+                </div>}
             <Register
               onRegistration = {handleRegistration}
             />

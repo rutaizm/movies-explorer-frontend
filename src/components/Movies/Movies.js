@@ -5,7 +5,8 @@ import Preloader from '../Preloader/Preloader.js';
 
 function Movies({foundedCards,isNoMoviesMessage,onSearch, onLike, onDelete, isChecked, renderLoading, onClick, savedMovies}) {
 
-
+   
+    
     return(
         <>
             <SearchForm
@@ -23,9 +24,17 @@ function Movies({foundedCards,isNoMoviesMessage,onSearch, onLike, onDelete, isCh
                 onDelete={onDelete}
                 onClick={onClick}
                 savedMovies={savedMovies}
+                // handleShowMorePosts={handleShowMorePosts}
             /> }
         </>
     )
 }
 
 export default Movies;
+
+ // const [ moviesCardsList, setMoviesCardsList] = React.useState([]);
+   
+    
+    // function handleShowMorePosts() {        
+    // setMoviesCardsList(foundedCards.slice(0, moviesCardsList.length + 2))
+    // }

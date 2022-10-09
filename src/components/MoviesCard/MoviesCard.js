@@ -34,15 +34,18 @@ function MoviesCard({movie,onLike, onDelete, savedMovies}) {
         }
       }
 
+
     return(
         <li className='card'>
             {/* <img className='card__image' src={cardImageSrc} alt={movie.nameRU}/> */}
-            {location.pathname === '/saved-movies' &&                 
-                <img className='card__image' src={movie.image} alt={movie.nameRU}/>
+            <a className='card__trailer-link' href={movie.trailerLink} target='blank'>
+                {location.pathname === '/saved-movies' &&                 
+                    <img className='card__image' src={movie.image} alt={movie.nameRU}/>
                 }               
                {location.pathname === '/movies' &&                 
-                <img className='card__image' src={BASE_URL + movie.image.url} alt={movie.nameRU}/>
+                    <img className='card__image' src={BASE_URL + movie.image.url} alt={movie.nameRU}/>
                 }
+            </a>    
             <div className='card__wrap'>
                 <p className='card__title'>{movie.nameRU}</p>           
                     {location.pathname === '/saved-movies' &&                 
