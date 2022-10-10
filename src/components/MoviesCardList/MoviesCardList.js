@@ -8,17 +8,17 @@ function MoviesCardList({cardsToRender, isNoMoviesMessage, onLike, onDelete, onC
     const screenSize = useScreenSize();
     const infoMessage = isNoMoviesMessage ? 'moviescard__message moviescard__message_type_active' : 'moviescard__message'
  
-    React.useEffect(() => {
-        if (screenSize > 1280) {
-          console.log('big')
-        } else if (screenSize > 1024) {
-            console.log('middle')
-        } else if (screenSize > 768) {
-            console.log('small')
-        } else if (screenSize > 320) {
-            console.log('xtrasmall')
-        }
-      }, [screenSize]);
+    // React.useEffect(() => {
+    //     if (screenSize > 1280) {
+    //       console.log('big')
+    //     } else if (screenSize > 1024) {
+    //         console.log('middle')
+    //     } else if (screenSize > 768) {
+    //         console.log('small')
+    //     } else if (screenSize > 320) {
+    //         console.log('xtrasmall')
+    //     }
+    //   }, [screenSize]);
       
 
     return(

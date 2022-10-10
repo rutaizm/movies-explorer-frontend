@@ -3,7 +3,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList.js';
 import Preloader from '../Preloader/Preloader.js';
 
-function Movies({foundedCards,isNoMoviesMessage,onSearch, onLike, onDelete, isChecked, renderLoading, onClick, savedMovies}) {
+function Movies({foundedCards,isNoMoviesMessage,onSearch, onLike, onDelete, isChecked, renderLoading, onClick, savedMovies, request}) {
 
    
     
@@ -12,6 +12,7 @@ function Movies({foundedCards,isNoMoviesMessage,onSearch, onLike, onDelete, isCh
             <SearchForm
                 onSearch = {onSearch}
                 isChecked={isChecked}
+                request={request}
             />
             { renderLoading && 
                 <div className='preloader__wrap'>

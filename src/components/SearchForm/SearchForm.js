@@ -1,11 +1,10 @@
 import React from 'react';
-import { useState } from 'react';
 import './SearchForm.css';
 
-function SearchForm({onSearch, isChecked, setRenderLoading}) {  
+function SearchForm({onSearch, request}) {  
 
-    const [searchValue, setSearchValue] = React.useState('');
-    const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
+    const [searchValue, setSearchValue] = React.useState(request ? request : '');
+    const [checkboxIsChecked, setCheckboxIsChecked] = React.useState(localStorage.getItem('isChecked') ? JSON.parse(localStorage.getItem('isChecked')) : false);
     const [errorMessage, setErrorMessage] = React.useState('');
 
     const isValid = (() => {
@@ -38,12 +37,11 @@ function SearchForm({onSearch, isChecked, setRenderLoading}) {
    function handleFormSubmit(e) {
         e.preventDefault();
         onSearch(searchValue);
-        console.log(searchValue)
     }   
 
-    function handleClick() {
-        // isChecked(checkboxIsChecked) 
-    }
+    // function handleClick() {
+    //     console.log(searchValue)
+    // }
 
     return(
         <section className='search-form'>
@@ -77,7 +75,7 @@ function SearchForm({onSearch, isChecked, setRenderLoading}) {
                         type='checkbox'
                         id='switch'
                         onChange={handleCheckbox}
-                        onClick={handleClick}
+                        checked={checkboxIsChecked}
                         />
                     <label htmlFor='switch' className='search-form__label'>Короткометражки</label>
                 </div>               

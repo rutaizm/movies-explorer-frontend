@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
@@ -13,7 +13,6 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import NotFound from '../NotFound/NotFound';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
-import Preloader from '../Preloader/Preloader';
 import InfoTooltip from '../InfoToolTip/InfoToolTip';
 import './App.css';
 import auth from '../../utils/MainApi';
@@ -32,12 +31,11 @@ function App() {
   const [movies, setMovies] = React.useState(localStorage.getItem('allMovies') ?
       JSON.parse(localStorage.getItem('allMovies')) : []);
   const [savedMovies, setSavedMovies] =React.useState(
-      localStorage.getItem('savedMovies') ?
-      JSON.parse(localStorage.getItem('savedMovies')) :
-      []);
+      localStorage.getItem('savedMovies') ? JSON.parse(localStorage.getItem('savedMovies')) : []);
+  const [request, setRequest] = React.useState(localStorage.getItem('PreviousReq') ?
+      JSON.parse(localStorage.getItem('PreviousReq')) : '');
 
   const [foundedCards, setFoundedCards] = React.useState([]);
-  const [shortMovies, setShortMovies]= React.useState([]);
  
   const [isNoMoviesMessage, setIsNoMoviesMessage] = React.useState('');
   const [renderLoading, setRenderLoading] =React.useState(false); 
@@ -167,6 +165,7 @@ function App() {
   function handleSearch(request) {
       setIsNoMoviesMessage('')
       setRenderLoading(true)
+      setRequest(request)
         if (request.length === 0) { 
           setRenderLoading(false);           
           return
@@ -222,6 +221,10 @@ function App() {
             .then((data) => {
                 setLoggedIn(true);           
                 setCurrentUser(data); 
+                setRequest('')
+                setMessage('')
+                setIsNoMoviesMessage('')
+                setToolTip(false)
             }) 
             .catch((err) => console.log(err)); 
     }
@@ -230,7 +233,6 @@ function App() {
 React.useEffect(() => {
   if (localStorage.getItem('jwt')) {
     handleCheckToken();
-    console.log(loggedIn)
   } else {
     setLoggedIn(false)
   }
@@ -279,7 +281,9 @@ React.useEffect(() => {
               onDelete={handleDeleteMovie}
               onSearch={handleSearch} 
               renderLoading={renderLoading} 
-              isNoMoviesMessage={isNoMoviesMessage}/>
+              isNoMoviesMessage={isNoMoviesMessage}
+              request={request}
+              />
             <Footer/> 
           </ProtectedRoute> 
 
@@ -298,6 +302,7 @@ React.useEffect(() => {
               onDelete={handleDeleteMovie}
               onSearch={handleSearchSavedMovies}           
               renderLoading={renderLoading} 
+              request={''}
               // isNoMoviesMessage={isNoMoviesMessage}
             />
             <Footer/> 

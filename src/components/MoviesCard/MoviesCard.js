@@ -26,11 +26,9 @@ function MoviesCard({movie,onLike, onDelete, savedMovies}) {
         const filmInDataBase = savedMovies.some((film) => film.movieId === movie.id);
         if(filmInDataBase){       
             onDelete(movie);
-            console.log(savedMovies)
         } 
         if (!filmInDataBase) {
             onLike(movie);
-            console.log(savedMovies)
         }
       }
 
