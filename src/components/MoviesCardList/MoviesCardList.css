@@ -29,10 +29,16 @@
     text-align: center;
     margin: 80px 0 88px;
     visibility: hidden;
+    transition: opacity 0.3s ease-out;
 }
 
 .moviescard__more-button_type_active {
     visibility: visible;
+}
+
+.moviescard__more-button_type_active:hover {
+    opacity: .6;    
+    cursor: pointer;
 }
 
 .moviescard__message {
