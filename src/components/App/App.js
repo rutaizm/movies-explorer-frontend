@@ -61,6 +61,7 @@ function App() {
         localStorage.setItem('jwt', data.token); 
         history.push("/movies");
         openToolTip();
+        setMessage('Вы успешно вошли в систему')
       })
       .catch((err) => {
         openToolTip();
@@ -159,6 +160,7 @@ function App() {
   function handleError(arr) {
     if (arr.length === 0) {
       arr.length === 0 ? setIsNoMoviesMessage('Ничего не найдено') : setIsNoMoviesMessage('');
+      setFoundedCards([]);
     }
 }
 
@@ -167,7 +169,7 @@ function App() {
       setRenderLoading(true)
       setRequest(request)
         if (request.length === 0) { 
-          setRenderLoading(false);           
+          setRenderLoading(false);  
           return
         } 
         if (JSON.parse(localStorage.getItem('isChecked')) === null) {

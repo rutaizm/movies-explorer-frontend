@@ -3,11 +3,12 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { useScreenSize } from '../../hooks/useScreenSize';
 
-function MoviesCardList({cardsToRender, isNoMoviesMessage, onLike, onDelete, onClick, savedMovies}) {   
+function MoviesCardList({showMore, handleShowMorePosts, cardsToRender, isNoMoviesMessage, onLike, onDelete, onClick, savedMovies}) {   
     
     const screenSize = useScreenSize();
     const infoMessage = isNoMoviesMessage ? 'moviescard__message moviescard__message_type_active' : 'moviescard__message'
  
+    const showMoreClassname = showMore? 'moviescard__more-button moviescard__more-button_type_active' : 'moviescard__more-button';
     // React.useEffect(() => {
     //     if (screenSize > 1280) {
     //       console.log('big')
@@ -40,8 +41,8 @@ function MoviesCardList({cardsToRender, isNoMoviesMessage, onLike, onDelete, onC
             </ul>
             <button 
                 type='button' 
-                className='moviescard__more-button'
-                // onClick={handleShowMorePosts}
+                className={showMoreClassname}
+                onClick={handleShowMorePosts}
             >
                 Ещё</button>
         </section>      

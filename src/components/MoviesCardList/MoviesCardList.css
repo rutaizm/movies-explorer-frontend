@@ -28,6 +28,11 @@
     background-color: white;
     text-align: center;
     margin: 80px 0 88px;
+    visibility: hidden;
+}
+
+.moviescard__more-button_type_active {
+    visibility: visible;
 }
 
 .moviescard__message {

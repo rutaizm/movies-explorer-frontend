@@ -5,13 +5,23 @@ import Preloader from '../Preloader/Preloader.js';
 
 function Movies({foundedCards,isNoMoviesMessage,onSearch, onLike, onDelete, isChecked, renderLoading, onClick, savedMovies, request}) {
 
-   
+    const [ moviesCardsList, setMoviesCardsList] = React.useState([]);
+    const [showMore, setShowMore] = React.useState(false);
     
+    function handleShowMorePosts() {        
+        setMoviesCardsList(foundedCards.slice(0, moviesCardsList.length + 2))
+    }
+
+    React.useEffect(() =>{
+        setMoviesCardsList(foundedCards.slice(0, 2)
+        );
+    }, [foundedCards])
+
     return(
         <>
             <SearchForm
                 onSearch = {onSearch}
-                isChecked={isChecked}
+                isChecked={isChecked}  
                 request={request}
             />
             { renderLoading && 
@@ -19,13 +29,14 @@ function Movies({foundedCards,isNoMoviesMessage,onSearch, onLike, onDelete, isCh
                     <Preloader/>
                 </div>}
             {<MoviesCardList
-                cardsToRender={foundedCards}
+                cardsToRender={moviesCardsList}
                 isNoMoviesMessage={isNoMoviesMessage}
                 onLike={onLike}
                 onDelete={onDelete}
                 onClick={onClick}
                 savedMovies={savedMovies}
-                // handleShowMorePosts={handleShowMorePosts}
+                handleShowMorePosts={handleShowMorePosts}
+                showMore={showMore}
             /> }
         </>
     )
@@ -33,9 +44,3 @@ function Movies({foundedCards,isNoMoviesMessage,onSearch, onLike, onDelete, isCh
 
 export default Movies;
 
- // const [ moviesCardsList, setMoviesCardsList] = React.useState([]);
-   
-    
-    // function handleShowMorePosts() {        
-    // setMoviesCardsList(foundedCards.slice(0, moviesCardsList.length + 2))
-    // }
