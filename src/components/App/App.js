@@ -85,6 +85,9 @@ function App() {
   function handleLogout() {
     setLoggedIn(false);
     localStorage.clear();
+    setFoundedCards([]);
+    setSavedMovies([]);
+    setMovies([]);
     history.push("/");
   }
 
@@ -235,6 +238,7 @@ function App() {
 React.useEffect(() => {
   if (localStorage.getItem('jwt')) {
     handleCheckToken();
+    handleShowSavedMovies();
   } else {
     setLoggedIn(false)
   }
