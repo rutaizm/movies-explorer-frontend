@@ -275,7 +275,8 @@ React.useEffect(() => {
                 isOpen={burgerMenuIsOpen}
                 isClose={closeBurgerMenu}/>
             <Header
-              isOpen={openBurgerMenu}/>  
+              isOpen={openBurgerMenu}
+              loggedIn={loggedIn}/>  
             <Movies
               foundedCards={foundedCards}
               onLike={handleSaveMovie}
@@ -297,7 +298,7 @@ React.useEffect(() => {
                 isClose={closeBurgerMenu}/>
             <Header 
               isOpen={openBurgerMenu}
-            />
+              loggedIn={loggedIn}/>
             <SavedMovies
               savedMovies={savedMovies}
               onLike={handleSaveMovie}
@@ -321,7 +322,7 @@ React.useEffect(() => {
             />
             <Header
               isOpen={openBurgerMenu}
-            />  
+              loggedIn={loggedIn}/>  
             <Profile
               onEditProfile={handleEditProfile}
               onLogout={handleLogout}
@@ -331,7 +332,7 @@ React.useEffect(() => {
           <Route exact path="/">
             <Header 
               page="main"
-            />
+              loggedIn={loggedIn}/>
             <Main/>
             <Footer/>   
           </Route>   
