@@ -36,7 +36,7 @@ function Register({onRegistration}) {
                         'signin__input signin__input_type_error' : 'signin__input'}                     
                     id='name'
                     required
-                    pattern={['^(?=.{8,40}$)[A-Za-zа-яА-ЯёЁ/\s/-]*$']}           
+                    pattern='^(?=.{8,40}$)[A-Za-zа-яА-ЯёЁ/\s/-]*$'          
                 />
                 <span className={errors.name ? 
                     'signin__error signin__error_type_active' : 'signin__error'}>{errorText.name}                
@@ -51,10 +51,11 @@ function Register({onRegistration}) {
                     className={errors.email ? 
                         'signin__input signin__input_type_error' : 'signin__input'}                     
                     id='Email'
+                    pattern='^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$'
                     required                  
                 />
                 <span className={errors.email ? 
-                    'signin__error signin__error_type_active' : 'signin__error'}>{errors.email}
+                    'signin__error signin__error_type_active' : 'signin__error'}>{errorText.email}
                 </span>
                 
                 <label className='signin__label' htmlFor='password'>Пароль</label>

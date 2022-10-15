@@ -44,12 +44,8 @@ function App() {
 
   function handleRegistration(data) {    
     auth.register(data.name, data.password, data.email)
-      .then(() => {
-        setLoggedIn(true);
-        localStorage.setItem('jwt', data.token); 
-        history.push("/movies");
-        openToolTip();
-        setMessage('Вы успешно вошли в систему')
+      .then((res) => {
+        handleLogin(data)
       })
       .catch((err) => {
         openToolTip();
@@ -57,7 +53,7 @@ function App() {
       });               
   }
 
-  function handleLogin(data){
+async function handleLogin(data){
     auth.login(data.password, data.email)
       .then((data) =>{
         setLoggedIn(true);
@@ -235,22 +231,12 @@ function App() {
 React.useEffect(() => {
   if (localStorage.getItem('jwt')) {
     handleCheckToken();
-    // handleShowSavedMovies();
     getPrevSearch();
+    handleShowSavedMovies();
   } else {
-    setLoggedIn(false)
+    handleLogout();
   }
 }, [loggedIn]);
-
-React.useEffect(() => {
-  handleShowSavedMovies();
-}, [])
-
-React.useEffect(() => {
-  if (localStorage.getItem('jwt')) {  
-    getPrevSearch();
-  } 
-}, []);
 
 React.useEffect(() => {
   setSavedMovies(savedMovies);
