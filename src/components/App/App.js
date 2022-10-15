@@ -88,6 +88,7 @@ function App() {
     setFoundedCards([]);
     setSavedMovies([]);
     setMovies([]);
+    setRequest('');
     history.push("/");
   }
 
@@ -170,7 +171,8 @@ function App() {
   function handleSearch(request) {
       setIsNoMoviesMessage('')
       setRenderLoading(true)
-      setRequest(request)
+      setRequest(request);
+      localStorage.setItem('PreviousReq', JSON.stringify(request))
         if (request.length === 0) { 
           setRenderLoading(false);  
           return
@@ -180,7 +182,8 @@ function App() {
             handleError(filteredMovies);             
             const arr = setLike(filteredMovies, savedMovies);
             setFoundedCards(arr);
-            setRenderLoading(false);            
+            localStorage.setItem('PreviousSearch', JSON.stringify(arr));
+            setRenderLoading(false);          
         } 
         if (JSON.parse(localStorage.getItem('isChecked'))) {        
             const allShortMovies = getShortMovies(movies);
@@ -188,9 +191,18 @@ function App() {
             handleError(filteredShortMovies); 
             const arr = setLike(filteredShortMovies, savedMovies);
             setFoundedCards(arr);
+            localStorage.setItem('PreviousSearch', JSON.stringify(arr));
             setRenderLoading(false); 
         }
   } 
+
+   function getPrevSearch() {
+    if (localStorage.getItem('PreviousReq')) {
+      handleSearch(JSON.parse(localStorage.getItem('PreviousReq')))
+      setRequest(JSON.parse(localStorage.getItem('PreviousReq')))
+    }
+   }
+
 
   function handleSearchSavedMovies(request) {
     setRenderLoading(true)
@@ -226,8 +238,8 @@ function App() {
             .then((data) => {
                 setLoggedIn(true);           
                 setCurrentUser(data); 
-                setRequest('')
-                setMessage('')
+                // setRequest('')
+                // setMessage('')
                 setIsNoMoviesMessage('')
                 setToolTip(false)
             }) 
@@ -239,10 +251,18 @@ React.useEffect(() => {
   if (localStorage.getItem('jwt')) {
     handleCheckToken();
     handleShowSavedMovies();
+    getPrevSearch()
+    console.log(request)
   } else {
     setLoggedIn(false)
   }
 }, [loggedIn]);
+
+React.useEffect(() => {
+  if (localStorage.getItem('jwt')) {  
+    getPrevSearch();
+  } 
+}, []);
 
 React.useEffect(() => {
   setSavedMovies(savedMovies);
