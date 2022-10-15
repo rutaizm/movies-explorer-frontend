@@ -9,7 +9,7 @@ function Movies({foundedCards,isNoMoviesMessage,onSearch, onLike, onDelete, isCh
     const screenSize = useScreenSize();
 
     const [ moviesCardsList, setMoviesCardsList] = React.useState([]);
-    const [showMore, setShowMore] = React.useState(false);
+    const [showMore, setShowMore] = React.useState(undefined);
     const [showOnClick, setShowOnClick] = React.useState(null);
     const [showOnStart, setShowOnStart]= React.useState(null);
     
@@ -30,8 +30,8 @@ React.useEffect(() => {
       }, [screenSize]);
 
     function handleShowMorePosts() {        
-        setMoviesCardsList(foundedCards.slice(0, moviesCardsList.length + showOnClick))
-        if (moviesCardsList.length >= moviesCardsList.length - showOnClick) {
+        setMoviesCardsList(foundedCards.slice(0, moviesCardsList.length + showOnClick));
+        if (moviesCardsList.length >= foundedCards.length - showOnClick) {
             setShowMore(false);
         }
     }
