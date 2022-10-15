@@ -71,13 +71,14 @@ function App() {
         setMessage(err);
       });      
   }
-
   
   function handleEditProfile(user) {
     const token = localStorage.getItem('jwt');
     auth.editProfileInfo(user.name, user.email, token)
       .then((res) => {
-        setCurrentUser(res)
+        setCurrentUser(res);
+        openToolTip();
+        setMessage('Вы успешно изменили информацию профиля');
     })
     .catch((err) => {
       openToolTip();

@@ -2,6 +2,7 @@ import React from 'react';
 import './Profile.css';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import useValidation from '../../hooks/useValidation';
+import { errorText} from '../../utils/constant'; 
 
 function Profile({onEditProfile, onLogout}) {
 
@@ -44,7 +45,7 @@ function Profile({onEditProfile, onLogout}) {
                         />                        
                     </div>
                     <span className={errors.name ? 
-                        'signin__error signin__error_type_active' : 'signin__error'}>{errors.name}                
+                        'signin__error signin__error_type_active' : 'signin__error'}>{errorText.name}                
                     </span>
                     <div className='profile__input-wrap'>
                         <label className='profile__label' htmlFor='email' type="Email">E-mail</label>
