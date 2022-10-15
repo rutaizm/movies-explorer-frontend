@@ -60,7 +60,8 @@ function Register({onRegistration}) {
                 <label className='signin__label' htmlFor='password'>Пароль</label>
                 <input 
                     name='password'
-                    type='text'
+                    type='password'
+                    secureTextEntry={true}
                     value={values.password || ''}
                     onChange={handleChange}
                     className={errors.password ? 
