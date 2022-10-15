@@ -4,6 +4,7 @@ import './Register.css';
 import { Link } from 'react-router-dom';
 import useValidation from '../../hooks/useValidation';
 import { useEffect } from 'react';
+import { errorText} from '../../utils/constant';
 
 function Register({onRegistration}) {
 
@@ -38,7 +39,7 @@ function Register({onRegistration}) {
                     pattern={['^(?=.{8,40}$)[A-Za-zа-яА-ЯёЁ/\s/-]*$']}           
                 />
                 <span className={errors.name ? 
-                    'signin__error signin__error_type_active' : 'signin__error'}>{errors.name}                
+                    'signin__error signin__error_type_active' : 'signin__error'}>{errorText.name}                
                 </span>
 
                 <label className='signin__label' htmlFor='Email'>E-mail</label>
