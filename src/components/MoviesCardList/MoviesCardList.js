@@ -1,10 +1,12 @@
 import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import {useLocation} from  'react-router';
 
 
-function MoviesCardList({showMore, handleShowMorePosts, cardsToRender, isNoMoviesMessage, onLike, onDelete, onClick, savedMovies}) {   
+function MoviesCardList({showMore, foundedSavedCards, handleShowMorePosts, cardsToRender, isNoMoviesMessage, onLike, onDelete, savedMovies}) {   
     
+    const location = useLocation();
    
     const infoMessage = isNoMoviesMessage ? 'moviescard__message moviescard__message_type_active' : 'moviescard__message'
  
@@ -17,16 +19,32 @@ function MoviesCardList({showMore, handleShowMorePosts, cardsToRender, isNoMovie
                 <p className={infoMessage}>{isNoMoviesMessage}</p>
             }       
             <ul className='moviescard__list'>
-                {cardsToRender.map((film) =>
-                   (<MoviesCard
-                        key={film.id || film._id}
-                        movie={film}
-                        onDelete={onDelete}
-                        onLike={onLike}
-                        onClick={onClick}
-                        savedMovies={savedMovies}
-                    />)  
-                )}
+
+                {location.pathname === '/movies' &&
+                    (cardsToRender.map((film) =>
+                    (<MoviesCard
+                            key={film.id || film._id}
+                            movie={film}
+                            onDelete={onDelete}
+                            onLike={onLike}
+                            savedMovies={savedMovies}
+                        />)  
+                    ))
+                }
+                {location.pathname === '/saved-movies' && 
+                    (cardsToRender.map((film) =>
+                    (<MoviesCard
+                            key={film.id || film._id}
+                            movie={film}
+                            onDelete={onDelete}
+                            onLike={onLike}
+                            savedMovies={savedMovies}
+                        />)
+                    ))
+                }
+
+
+
             </ul>
             <button 
                 type='button' 

@@ -4,7 +4,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList.js';
 import Preloader from '../Preloader/Preloader.js';
 import { useScreenSize } from '../../hooks/useScreenSize';
 
-function Movies({foundedCards,isNoMoviesMessage,onSearch, onLike, onDelete, isChecked, renderLoading, onClick, savedMovies, request}) {
+function Movies({foundedCards,isNoMoviesMessage, onSearch, onLike, onDelete, isChecked, renderLoading, savedMovies, request}) {
 
     const screenSize = useScreenSize();
 
@@ -64,7 +64,6 @@ React.useEffect(() => {
                 isNoMoviesMessage={isNoMoviesMessage}
                 onLike={onLike}
                 onDelete={onDelete}
-                onClick={onClick}
                 savedMovies={savedMovies}
                 handleShowMorePosts={handleShowMorePosts}
                 showMore={showMore}

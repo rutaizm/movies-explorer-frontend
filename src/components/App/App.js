@@ -36,7 +36,7 @@ function App() {
       JSON.parse(localStorage.getItem('PreviousReq')) : '');
 
   const [foundedCards, setFoundedCards] = React.useState([]);
- 
+  
   const [isNoMoviesMessage, setIsNoMoviesMessage] = React.useState('');
   const [renderLoading, setRenderLoading] =React.useState(false); 
   const [toolTip, setToolTip] = React.useState(true); 
@@ -97,8 +97,6 @@ function App() {
   }
 
   function handleSaveMovie(film) {
-    const isLiked = savedMovies.some(i => i.movieId === film.id);
-    const savedCard = savedMovies.find(i => i.movieId === film.id);
     const token = localStorage.getItem('jwt');
     auth.saveMovie(
       {
@@ -113,12 +111,9 @@ function App() {
         movieId: film.id,
         nameRU: film.nameRU || '-',
         nameEN: film.nameEN || '-',
-      }, token, isLiked, savedCard?._id
+      }, token
     )
         .then((newSavedMovie) => {
-          if (isLiked) {
-            setSavedMovies((state) => state.filter((m) => m.movieId !== film.id))
-          }
           if (JSON.parse(localStorage.getItem('savedMovies')) > 0) {
             const savedFilm = JSON.parse(localStorage.getItem('savedMovies'));
             const filterSavedFilm = savedFilm.filter((m) => m.movieId !== film.movieId);
@@ -126,6 +121,7 @@ function App() {
             localStorage.setItem('savedMovies', JSON.stringify(filterSavedFilm));
           } else {
             setSavedMovies([...savedMovies, newSavedMovie])
+            console.log(newSavedMovie._id)
           }
         })
         .catch((err) => {
@@ -141,6 +137,7 @@ function App() {
         .then(() => {
           setSavedMovies((cards) => cards.filter((item) => item._id !== film._id));
           handleShowSavedMovies()
+          console.log(savedMovies)
         })
         .catch((err) => {
           openToolTip();
@@ -208,22 +205,6 @@ function App() {
    }
 
 
-  function handleSearchSavedMovies(request) {
-    setRenderLoading(true)
-    if (request.length === 0) { 
-      setRenderLoading(false);           
-      return
-    } if (savedMovies === null) {
-        handleError(savedMovies);             
-        setRenderLoading(false);            
-    } else  {       
-      const filteredSavedMovies = filterMovies(request, savedMovies); 
-      handleError(filteredSavedMovies); 
-      setSavedMovies(filteredSavedMovies);
-      setRenderLoading(false); 
-      }
-  } 
-
   function handleShowSavedMovies() {
     const token = localStorage.getItem('jwt');
     auth.getSavedMovies(token)
@@ -254,13 +235,16 @@ function App() {
 React.useEffect(() => {
   if (localStorage.getItem('jwt')) {
     handleCheckToken();
-    handleShowSavedMovies();
-    getPrevSearch()
-    console.log(request)
+    // handleShowSavedMovies();
+    getPrevSearch();
   } else {
     setLoggedIn(false)
   }
 }, [loggedIn]);
+
+React.useEffect(() => {
+  handleShowSavedMovies();
+}, [])
 
 React.useEffect(() => {
   if (localStorage.getItem('jwt')) {  
@@ -330,11 +314,13 @@ React.useEffect(() => {
             <SavedMovies
               savedMovies={savedMovies}
               onLike={handleSaveMovie}
-              onDelete={handleDeleteMovie}
-              onSearch={handleSearchSavedMovies}           
+              onDelete={handleDeleteMovie}     
               renderLoading={renderLoading} 
               request={''}
-              // isNoMoviesMessage={isNoMoviesMessage}
+              isNoMoviesMessage={isNoMoviesMessage}
+              setIsNoMoviesMessage={setIsNoMoviesMessage}
+              setRenderLoading={setRenderLoading}
+              handleShowSavedMovies={handleShowSavedMovies}
             />
             <Footer/> 
           </ProtectedRoute>

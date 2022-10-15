@@ -63,32 +63,18 @@ export class Auth {
         .then(this._handleError);
     }
     
-    saveMovie(film, token, isLiked, savedCard) {
+    saveMovie(film, token) {
+        return fetch(`${this._url}/movies`, {
+            method: 'POST',
+            headers: {
+                ...this._headers,
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(film),
+        })
+            .then(this._handleError);
 
-        if (isLiked) {
-            return fetch(`${this._url}/movies/${savedCard._id}`, {
-                method: 'DELETE',
-                headers: {
-                    ...this._headers,
-                    Authorization: `Bearer ${token}`
-                },
-            })
-                .then(this._handleError);
-        }
-            else {
-                return fetch(`${this._url}/movies`, {
-                    method: 'POST',
-                    headers: {
-                        ...this._headers,
-                        Authorization: `Bearer ${token}`
-                    },
-                    body: JSON.stringify(film),
-                })
-                    .then(this._handleError);
-
-            }   
-
-    }
+    }       
     
     deleteMovie(_id, token, savedCard_id) {
         if(_id === null) {
