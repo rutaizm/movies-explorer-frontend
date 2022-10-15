@@ -44,9 +44,12 @@ function App() {
 
   function handleRegistration(data) {    
     auth.register(data.name, data.password, data.email)
-      .then((data) => {
+      .then(() => {
         setLoggedIn(true);
+        localStorage.setItem('jwt', data.token); 
         history.push("/movies");
+        openToolTip();
+        setMessage('Вы успешно вошли в систему')
       })
       .catch((err) => {
         openToolTip();
