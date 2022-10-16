@@ -1,11 +1,15 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import './SearchForm.css';
 
-function SearchForm({onSearch, request}) {  
+function SearchForm({onSearch, savedMoviesShort, setSavedMoviesShort, request}) {  
+
+    const location = useLocation();
 
     const [searchValue, setSearchValue] = React.useState(request ? request : '');
     const [checkboxIsChecked, setCheckboxIsChecked] = React.useState(localStorage.getItem('isChecked') ? JSON.parse(localStorage.getItem('isChecked')) : false);
     const [errorMessage, setErrorMessage] = React.useState('');
+    
 
     const isValid = (() => {
         if (searchValue.length > 0) {
@@ -34,15 +38,19 @@ function SearchForm({onSearch, request}) {
         } 
     }
 
+    function handleSavedMoviesCheckbox(e) {
+        if (e.target.checked){
+            setSavedMoviesShort(true);
+        } else {
+            setSavedMoviesShort(false);
+        } 
+    }
+
    function handleFormSubmit(e) {
         e.preventDefault();
         onSearch(searchValue);
     }   
-
-    // function handleClick() {
-    //     console.log(searchValue)
-    // }
-
+    
     return(
         <section className='search-form'>
             <form 
@@ -69,14 +77,25 @@ function SearchForm({onSearch, request}) {
                     >
                         Найти
                 </button>
-                <div className='search-form__wrap'>                    
+                <div className='search-form__wrap'>  
+                {location.pathname === '/movies' &&                  
                     <input 
                         className='search-form__checkbox' 
                         type='checkbox'
                         id='switch'
                         onChange={handleCheckbox}
                         checked={checkboxIsChecked}
-                        />
+                        /> 
+                }
+                {location.pathname === '/saved-movies' && 
+                    <input 
+                        className='search-form__checkbox' 
+                        type='checkbox'
+                        id='switch'
+                        onChange={handleSavedMoviesCheckbox}
+                        checked={savedMoviesShort}
+                    /> 
+                }
                     <label htmlFor='switch' className='search-form__label'>Короткометражки</label>
                 </div>               
             </form>

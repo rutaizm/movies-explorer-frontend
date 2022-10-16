@@ -18,7 +18,6 @@ function MoviesCard({movie, onLike, onDelete, savedMovies, onChange}) {
 
     function handleDelete() {
         onDelete(movie);
-         console.log(movie)
     }
     function handleClick() {
         // const filmInDataBase = savedMovies.some((film) => film.movieId === movie.id);

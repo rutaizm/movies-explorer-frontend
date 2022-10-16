@@ -117,7 +117,6 @@ async function handleLogin(data){
             localStorage.setItem('savedMovies', JSON.stringify(filterSavedFilm));
           } else {
             setSavedMovies([...savedMovies, newSavedMovie])
-            console.log(newSavedMovie._id)
           }
         })
         .catch((err) => {
@@ -127,7 +126,6 @@ async function handleLogin(data){
   }
 
   function handleDeleteMovie(film) {
-    console.log(film)
     const token = localStorage.getItem('jwt');
     const savedCard = savedMovies.find(i => i.movieId === film.id);
     auth.deleteMovie(film._id, token, savedCard?._id,)
@@ -164,7 +162,7 @@ async function handleLogin(data){
       arr.length === 0 ? setIsNoMoviesMessage('Ничего не найдено') : setIsNoMoviesMessage('');
       setFoundedCards([]);
     }
-}
+  }
 
   function handleSearch(request) {
       setIsNoMoviesMessage('')
@@ -194,13 +192,12 @@ async function handleLogin(data){
         }
   } 
 
-   function getPrevSearch() {
+  function getPrevSearch() {
     if (localStorage.getItem('PreviousReq')) {
       handleSearch(JSON.parse(localStorage.getItem('PreviousReq')))
       setRequest(JSON.parse(localStorage.getItem('PreviousReq')))
     }
-   }
-
+  }
 
   function handleShowSavedMovies() {
     const token = localStorage.getItem('jwt');
@@ -304,7 +301,6 @@ React.useEffect(() => {
               isNoMoviesMessage={isNoMoviesMessage}
               setIsNoMoviesMessage={setIsNoMoviesMessage}
               setRenderLoading={setRenderLoading}
-              handleShowSavedMovies={handleShowSavedMovies}
             />
             <Footer/> 
           </ProtectedRoute>

@@ -2,13 +2,14 @@ import React from 'react';
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import {filterMovies} from '../../utils/movieFunction';
+import {filterMovies, getShortMovies} from '../../utils/movieFunction';
 
 function SavedMovies({setRenderLoading, requestSavesMovies, savedMovies, isChecked, onDelete, onClick, isNoMoviesMessage, setIsNoMoviesMessage}) {
 
     const [foundedSavedCards, setFoundedSavedCards] = React.useState([]);
     const [displayedMovies, setDisplayedMovies] = React.useState([]);
     const [searchActive, setSearchActive] = React.useState(false);
+    const [savedMoviesShort, setSavedMoviesShort]= React.useState(false);
 
     function handleError(arr) {
         if (arr.length === 0) {
@@ -27,12 +28,18 @@ function SavedMovies({setRenderLoading, requestSavesMovies, savedMovies, isCheck
     } if (savedMovies === null) {
         handleError(savedMovies);             
         setRenderLoading(false);            
+    } if (savedMoviesShort) {
+        const shortFilms = getShortMovies(savedMovies);
+        const filteredSavedMovies = filterMovies(request, shortFilms); 
+        handleError(filteredSavedMovies); 
+        setFoundedSavedCards(filteredSavedMovies);
+        setRenderLoading(false); 
     } else  {       
       const filteredSavedMovies = filterMovies(request, savedMovies); 
       handleError(filteredSavedMovies); 
       setFoundedSavedCards(filteredSavedMovies);
       setRenderLoading(false); 
-      }
+    }
   } 
 
   React.useEffect(() => {
@@ -50,6 +57,8 @@ function SavedMovies({setRenderLoading, requestSavesMovies, savedMovies, isCheck
                  onSearch = {handleSearchSavedMovies}
                  isChecked={isChecked}
                  request={requestSavesMovies}
+                 setSavedMoviesShort={setSavedMoviesShort}
+                 savedMoviesShort={savedMoviesShort}
             />
             <MoviesCardList
                 cardsToRender={displayedMovies}
