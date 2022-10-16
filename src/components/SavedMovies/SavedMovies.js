@@ -4,9 +4,11 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import {filterMovies} from '../../utils/movieFunction';
 
-function SavedMovies({handleShowSavedMovies, setRenderLoading, requestSavesMovies, savedMovies, onLike,isChecked, onDelete, onClick, isNoMoviesMessage, setIsNoMoviesMessage}) {
+function SavedMovies({setRenderLoading, requestSavesMovies, savedMovies, isChecked, onDelete, onClick, isNoMoviesMessage, setIsNoMoviesMessage}) {
 
-    const [foundedSavedCards, setFoundedSavedCards] = React.useState(savedMovies);
+    const [foundedSavedCards, setFoundedSavedCards] = React.useState([]);
+    const [displayedMovies, setDisplayedMovies] = React.useState([]);
+    const [searchActive, setSearchActive] = React.useState(false);
 
     function handleError(arr) {
         if (arr.length === 0) {
@@ -16,6 +18,7 @@ function SavedMovies({handleShowSavedMovies, setRenderLoading, requestSavesMovie
     }
        
   function handleSearchSavedMovies(request) {
+    setSearchActive(true)
     setIsNoMoviesMessage('')
     setRenderLoading(true)
     if (request.length === 0) { 
@@ -31,12 +34,16 @@ function SavedMovies({handleShowSavedMovies, setRenderLoading, requestSavesMovie
       setRenderLoading(false); 
       }
   } 
-  
-  React.useEffect(() =>{
-    handleShowSavedMovies();
-    setIsNoMoviesMessage('');
-  }, [foundedSavedCards])
-    
+
+  React.useEffect(() => {
+    if (!searchActive) {
+      setDisplayedMovies(savedMovies);
+    }
+    if (searchActive){
+      setDisplayedMovies(foundedSavedCards)
+    }
+  }, [savedMovies, foundedSavedCards])
+
     return(
         <>
             <SearchForm             
@@ -45,12 +52,10 @@ function SavedMovies({handleShowSavedMovies, setRenderLoading, requestSavesMovie
                  request={requestSavesMovies}
             />
             <MoviesCardList
-                cardsToRender={foundedSavedCards}
-                onLike={onLike}
+                cardsToRender={displayedMovies}
                 onDelete={onDelete} 
                 onClick={onClick}
                 isNoMoviesMessage={isNoMoviesMessage}
-                foundedSavedCards={foundedSavedCards}
                 setRenderLoading={setRenderLoading}
             />
         </>

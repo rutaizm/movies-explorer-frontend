@@ -21,7 +21,6 @@ export class Auth {
     } 
 
     login (password, email) {
-        console.log(password, email)
         return fetch(`${this._url}/signin`, {
             method: 'POST',
             headers: this._headers,

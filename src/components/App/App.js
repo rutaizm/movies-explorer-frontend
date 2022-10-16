@@ -127,13 +127,14 @@ async function handleLogin(data){
   }
 
   function handleDeleteMovie(film) {
+    console.log(film)
     const token = localStorage.getItem('jwt');
     const savedCard = savedMovies.find(i => i.movieId === film.id);
     auth.deleteMovie(film._id, token, savedCard?._id,)
         .then(() => {
-          setSavedMovies((cards) => cards.filter((item) => item._id !== film._id));
+          const filterSavedFilm = savedMovies.filter((item) => item._id !== film._id);
+          localStorage.setItem('savedMovies', JSON.stringify(filterSavedFilm));
           handleShowSavedMovies()
-          console.log(savedMovies)
         })
         .catch((err) => {
           openToolTip();
@@ -219,8 +220,6 @@ async function handleLogin(data){
             .then((data) => {
                 setLoggedIn(true);           
                 setCurrentUser(data); 
-                // setRequest('')
-                // setMessage('')
                 setIsNoMoviesMessage('')
                 setToolTip(false)
             }) 
@@ -299,7 +298,6 @@ React.useEffect(() => {
               loggedIn={loggedIn}/>
             <SavedMovies
               savedMovies={savedMovies}
-              onLike={handleSaveMovie}
               onDelete={handleDeleteMovie}     
               renderLoading={renderLoading} 
               request={''}
