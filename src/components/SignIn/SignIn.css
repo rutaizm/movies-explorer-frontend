@@ -1,0 +1,172 @@
+.signin {
+    padding-top: 70px;
+}
+
+.signin__container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 396px;
+}
+
+.signin__hello {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    margin: 38px 0 35px;
+}
+
+.signin__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.signin__wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border: none;
+}
+
+.signin__label {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #A0A0A0;
+    width: 100%;
+}
+
+.signin__input {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    min-height: 46px;
+    background-color: #F9F9F9;
+    border-radius: 8px;
+    width: 100%;
+    border: none;
+    outline: none;
+    margin: 14px 0;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.signin__input_type_error {
+    color: #FF4062;
+}
+
+.signin__error {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #FF4062;
+    visibility: hidden;
+}
+
+.signin__error_type_active {
+    visibility: visible;
+}
+
+.signin__button {
+    width: 396px;
+    height: 45px;
+    background-color: black;
+    color: white;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 61px;
+    border-color: black;  
+}
+
+.signin__button_type_active {
+    transition: opacity 0.3s ease-out;
+}
+
+.signin__button_type_disabled {
+    background-color: grey;
+    border: none;
+    transition: none;
+}
+
+.signin__caption {
+    display: flex;
+    align-items: baseline;
+    padding-top: 4px;
+    box-sizing: border-box;
+}
+
+.signin__text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #A0A0A0;
+}
+
+.signin__login {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration: none;
+    color: black;
+    margin-left: 6px;
+    transition: opacity 0.3s ease-out;  
+}
+
+.signin__login:hover, .signin__button_type_active:hover {
+    cursor: pointer;
+    opacity: .6;
+}
+
+@media screen and (min-width:320px) and (max-width:539px) {
+    .signin {
+        padding-top: 57px;
+    }
+
+    .signin__container {
+        min-width: 320px;
+        align-items: center;
+    }
+    .signin__wrap {
+       box-sizing: border-box;
+    }
+
+    .signin__label, .signin__input {
+        width: 260px;
+    }
+
+    .signin__label {
+        margin-bottom: -3px;
+    }
+
+    .signin__input{
+        margin-bottom: 20px;
+        margin-top: 13px;
+    }
+
+    .signin__hello {
+        margin: 50px 0 74px;
+    }
+
+    .signin__button {
+        width: 260px;
+        height: 45px;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+        margin-top: 149px;
+    }  
+    
+    .signin__text, .signin__login {
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .signin__caption {
+        padding-top: 2px;
+    }
+}

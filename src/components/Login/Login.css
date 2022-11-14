@@ -1,0 +1,9 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login__span {
+    margin-top: 88px
+}

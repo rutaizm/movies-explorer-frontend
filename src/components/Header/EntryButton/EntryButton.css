@@ -1,0 +1,53 @@
+.entry-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    margin-right: 70px;
+    text-align: center;
+    align-content: center;
+}
+
+.entry-button__signup {
+    color: black;
+    margin-right: 30px;
+    transition: opacity 0.3s ease-out;
+}
+
+.entry-button__signin {
+    display: flex;
+    color: white;
+    width: 76px;
+    height: 32px;
+    background-color: black;
+    border-radius: 3px;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease-out;
+}
+.entry-button__signup:hover, .entry-button__signin:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+@media screen and (min-width:540px) and (max-width:768px) {
+    .entry-button {
+        margin-right: 30px; 
+    }
+}
+
+@media screen and (min-width:320px) and (max-width:539px) {
+    .entry-button {
+        font-size: 10px;
+        margin-right: 14px; 
+    }
+    .entry-button__signup {
+        margin-right: 14px;
+    }    
+    .entry-button__signin {
+        width: 54px;
+        height: 26px;
+    }
+}

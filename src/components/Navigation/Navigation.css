@@ -1,0 +1,66 @@
+.navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.navigation__links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;    
+}
+
+.navigation__profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 70px;
+    box-sizing: border-box;
+}
+
+.navigation__movies {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+    margin-left: 44px;
+    transition: opacity 0.3s ease-out;
+    color: black;
+    text-decoration: none;
+}
+
+.navigation__saved-movies {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    margin-left: 17px;
+    transition: opacity 0.3s ease-out;
+    color: black;
+    text-decoration: none;
+}
+
+.navigation__account {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    margin-right: 14px;
+    transition: opacity 0.3s ease-out;
+    color: black;
+    text-decoration: none;
+}
+
+.navigation__icon{    
+    width: 30px;
+    height: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #F9F9F9;
+    background-image: url(../../images/icon.svg);
+    border-radius: 6px;
+    border-color: transparent;
+    transition: opacity 0.3s ease-out;
+}
+
+.navigation__movies:hover, .navigation__saved-movies:hover, .navigation__account:hover, .navigation__icon:hover {
+    cursor: pointer;
+    opacity: .6;
+}
